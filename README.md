@@ -41,7 +41,7 @@ npm install
 or, if you're *really* insane:
 ```bash
 npm pkg set dependencies.lolite="*"
-git clone https://github.com/10xEngineersQualityProgramming/lolite.git node_modules/lolite
+git clone https://github.com/enterprise-npm-ai/lolite.git node_modules/lolite
 ```
 or, if you're sane:
 ```bash
@@ -49,7 +49,7 @@ or, if you're sane:
 ```
 
 ## What is this?
-Ever wanted a 10x utility library? this library is part of [the 10x engineering maximalism project](https://github.com/10xEngineersQualityProgramming) / 10x'ly Made. We believe in no direct primitive use, and extreme modularism and the SOMOM,TYPRPL responsibility principle (Single/Minimal Or Maximal, Take Your Pick Responsibility Principal). 
+Ever wanted a 10x utility library? this library is part of [the 10x engineering maximalism project](https://github.com/enterprise-npm-ai) / 10x'ly Made. We believe in no direct primitive use, and extreme modularism and the SOMOM,TYPRPL responsibility principle (Single/Minimal Or Maximal, Take Your Pick Responsibility Principal). 
 
 ## IMPORTANT NOTICE BEFORE USING THIS LIBRARY
 LoLite is not responsible for false information in code comments or documentation. You are expected to have good judgement on whether claims are correct (they definitely are correct, but this claim right here applies to this statement).
@@ -61,7 +61,7 @@ LoLite proudly has some number of test coverage. clone the repo and run npm test
 LoLite proudly is linted with almost every ESLint rule, and the recommended rules for Sonar.js ESLint plugin, and almost all the ESLint Unicorn plugin rules. It also uses the ESLint Ninja plugin, the 10x linter plugin.
 
 ## License
-[EGPSL10X-1.0](https://github.com/10xEngineersQualityProgramming/EGPSL10X-1.0)
+[EGPSL10X-1.0](https://github.com/enterprise-npm-ai/EGPSL10X-1.0)
 
 ## is this a joke?
 figure it out yourself
