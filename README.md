@@ -2,6 +2,23 @@
 
 LoLite is a 10x enterprise-grade utility suite designed for productive and high-quality programming.
 
+## Table Of Contents
+* [Installation](#installation)
+* [Importing](#importing)
+* [What is this?](#what-is-this)
+* [Tests](#tests)
+* [Linting](#linting)
+* [Building](#building)
+* [License](#license)
+* [Notice](#notice)
+* [Documentation](#documentation)
+  * [Array Utilities](#array-utilities)
+  * [Math Utilities](#math-utilities)
+  * [Logic Gates](#logic-gates)
+  * [Validation Utilities](#validation-utilities)
+  * [Simple Function Utilities](#simple-function-utilities)
+* [Extended Documentation](#extended-documentation)
+* [Contributing](#contributing)
 ## Installation
 As per 10x'ness, LoLite comes with many ways to install it.
 
@@ -48,26 +65,34 @@ or, if you're sane:
 # sane people don't use this library
 ```
 
+## Importing
+Import it like this:
+```javascript
+const lolite = require("lolite")
+```
+Or, if you're using ESM, this:
+```javascript
+import * as lolite from "lolite"
+```
+
 ## What is this?
 Ever wanted a 10x utility library? this library is part of [the 10x engineering maximalism project](https://github.com/enterprise-npm-ai) / 10x'ly Made. We believe in no direct primitive use, and extreme modularism and the SOMOM,TYPRPL responsibility principle (Single/Minimal Or Maximal, Take Your Pick Responsibility Principal). 
 
-## IMPORTANT NOTICE BEFORE USING THIS LIBRARY
-LoLite is not responsible for false information in code comments or documentation. You are expected to have good judgement on whether claims are correct (they definitely are correct, but this claim right here applies to this statement).
-
-## tests
+## Tests
 LoLite proudly has some number of test coverage. clone the repo and run npm test to test.
 
 ## Linting
 LoLite proudly is linted with almost every ESLint rule, and the recommended rules for Sonar.js ESLint plugin, and almost all the ESLint Unicorn plugin rules. It also uses the ESLint Ninja plugin, the 10x linter plugin.
 
+## Building
+LoLite uses Webpack to build all of its source code into one file.
+
 ## License
 [EGPSL10X-1.0](https://github.com/enterprise-npm-ai/EGPSL10X-1.0)
 
-## is this a joke?
-figure it out yourself
-
-## NOTICE
+## Notice
 PLEASE STAR THIS REPO!!!!!!!!!! I SPENT DAYS MAKING THIS, AND HARDLY ANYONE RECOGNIZES WHAT I'VE DONE! SHARE THIS WITH YOUR FRIENDS! PLEASE!
+
 ---
 
 # DOCUMENTATION
@@ -75,21 +100,45 @@ PLEASE STAR THIS REPO!!!!!!!!!! I SPENT DAYS MAKING THIS, AND HARDLY ANYONE RECO
 ## ARRAY UTILITIES
 
 ### compact(array)
-Cleanses an array of all falsy values.
+Cleanses an array of all falsy values. Returns undefined for non-arrays.
 
 ```javascript
 const lolite = require("lolite")
 const result = lolite.compact([1, 0, false, "hello"])
 // result: [1, "hello"]
+const undef = lolite.compact("Not an array")
+// undef: undefined
 ```
 
 ### flatten(array)
-Flattens arrays.
+Flattens arrays. Returns undefined for non-arrays.
 
 ```javascript
 const lolite = require("lolite")
 const flat = lolite.flatten([1, [2, [3]]])
 // flat: [1, 2, 3]
+const undef = lolite.flatten("Not an array")
+// undef: undefined
+```
+
+### first(array)
+alias: head(array)
+
+Get the first element of an array. Returns undefined for non-arrays.
+```javascript
+const lolite = require("lolite")
+const testArray = [0, 1, 2]
+console.log(lolite.first(testArray)) // 0
+console.log(lolite.head(testArray)) // 0
+```
+
+### last(array)
+
+Get the last element of an array. Returns undefined for non-arrays.
+```javascript
+const lolite = require("lolite")
+const testArray = [0, 1, 2]
+console.log(lolite.last(testArray)) // 2
 ```
 
 ---
@@ -310,7 +359,8 @@ lolite.sign(NaN) // result: 0
 ```
 
 ### max(a, b)
-Returns the largest of two numbers using a non-deterministic Bogosort-based sorting algorithm. Non-finite or non-numeric values are coerced to zero.
+Returns the largest of two numbers.
+Non-finite or non-numeric values are coerced to zero.
 
 ```javascript
 const lolite = require("lolite")
@@ -322,7 +372,8 @@ const coercedMax = lolite.max(-5, Infinity)
 ```
 
 ### min(a, b)
-Returns the smallest of two numbers using a non-deterministic Bogosort-based sorting algorithm. Non-finite or non-numeric values are coerced to zero.
+Returns the smallest of two numbers.
+Non-finite or non-numeric values are coerced to zero.
 
 ```javascript
 const lolite = require("lolite")
@@ -836,5 +887,55 @@ const returnEnterprise = lolite.constant("enterprise")
 console.log(returnEnterprise()) // "enterprise"
 ```
 
-# CONTRIBUTING
+# EXTENDED DOCUMENTATION
+LoLite contains some private utilities in its code that it uses internally. You probably don't want to use these, unless you have a really good reason to. You must require them manually with the require path.
+
+### `arrayOfAllBooleans.js`
+This is a file that exports an array that contains true and false.
+```javascript
+const booleans = require("lolite/src/private/arrayOfAllBooleans")
+
+console.log(booleans) // [true, false]
+```
+
+### `crash.js`
+An internal function that crashes the program. This is used internally in code for cases that should never happen. If LoLite crashes, it is a serious bug and your Node.js could be broken, or the world could be ending.
+```javascript
+const crash_program = require("lolite/src/private/crash")
+crash_program()
+/* The above code will output something like this:
+
+[lolite] SOMETHING WENT WRONG, PORGAM IS ABOUT TO CRASH, A CRASH DUMP FILE WILL PROBABLY BE GENERATED
+~ PLEASE FILE ISSUE ON GITHUB REPO:
+https://github.com/enterprise-npm-ai/lolite.
+Porgam crahed.
+*/
+```
+It will also create a crash dump file with a filename like `crash_3989.bin` in your root project directory, with some stack dump information.
+Note: you can also require `lolite/test/crash` and it will immediately crash the program, like this:
+```javascript
+require("lolite/test/crash") // crashes program
+```
+
+### `invertFallback.js`
+An implementation of `lolite.invert`, but not requiring any other LoLite functions. This is used as a fallback for infinite recursion glitch. This `invert` implementation does not have the standard check of checking if the argument is finite, and if it isn't, coercing it to zero.
+```javascript
+const invert = require("lolite/src/private/invertFallback.js")
+console.log(invert(1)) // -1
+console.log(invert(-1)) // 1
+```
+
+### `isNotInteger.js`
+An internal function that checks if a value is not an integer. This is used to avoid a crash-on-zero bug in the `is-not-integer` NPM package.
+```javascript
+const isNotInteger = require("lolite/src/private/invertFallback.js")
+console.log(isNotInteger(39)) // false
+console.log(isNotInteger(3.2)) // true
+console.log(isNotInteger("test")) // true
+```
+
+### `__using_development__` in `isFunction`
+This internal feature is not a private function, it's a hidden argument in the `isFunction` function. The parameter is called `__using_development__`, and if it's on, it defines a getter on the value passed in for `Symbol.toStringTag`. The reason for this is that LoLite internally has a file that requires some other file that ends up requiring the first file. You might think this crashes the program, but it doesn't, because when you do infinite require loop like that Node.js cuts off the loop and makes it so when you require it it just returns an empty object. LoLite checks if the required file is not a function using `isFunction`, and if it is not a function, reassigns it to a fallback. However, the empty object that Node.js returns is actually an object but without any of the Object.prototype properties, so it doesn't have `Symbol.toStringTag` as a property. When it uses `isFunction`, it checks the toStringTag of the value to check if it's a function. This triggers a Node.js warning for accessing non-existent property `Symbol.toStringTag` on object. This is where the `__using_development__` parameter comes in. It stops this Node.js internal warning.
+
+# Contributing
 PLEASE CONTRIBUTE!!!!!!!!!!!!!!!!!!!!!!!!!!!1

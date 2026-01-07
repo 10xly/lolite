@@ -1,6 +1,7 @@
 {
   "name": "lolite",
-  "version": "1.0.1",
+  "private": false,
+  "version": "1.1.0",
   "description": "The 10x Utility Library",
   "keywords": [
     "lolite",
@@ -8,7 +9,52 @@
     "utility",
     "10x",
     "enterprise",
-    "package"
+    "package",
+    "lodash",
+    "underscore",
+    "ramda",
+    "utility-library",
+    "functional",
+    "modular",
+    "type-safe",
+    "tested",
+    "mathematical-operations",
+    "array-manipulation",
+    "logic-gates",
+    "validation",
+    "typescript-definitions",
+    "enterprise-grade",
+    "production-ready",
+    "iso-certified",
+    "soc2-compliant",
+    "hipaa-ready",
+    "gdpr-compatible",
+    "10x-engineer",
+    "10x engineer",
+    "10x-engineered",
+    "10x engineered",
+    "falsejs",
+    "jsfruit",
+    "libvegetable",
+    "is-ten",
+    "is-hundred",
+    "is-thousand",
+    "is-ten-thousand",
+    "is-odd",
+    "is-is-odd",
+    "is-thirteen",
+    "aura3",
+    "lolit",
+    "litloe",
+    "enterprise-npm",
+    "ai",
+    "enterprise-npm-ai",
+    "10x'ly Made",
+    "10xEngineersQualityProgramming",
+    "is-unknown",
+    "rightpad",
+    "js-constant",
+    "is-not-ten-thousand"
   ],
   "homepage": "https://github.com/enterprise-npm-ai/lolite#readme",
   "bugs": {
@@ -18,18 +64,72 @@
     "type": "git",
     "url": "git+https://github.com/enterprise-npm-ai/lolite.git"
   },
-  "license": "MIT",
-  "author": "10x'ly Made",
+  "license": "EGPSL10X-1.0",
+  "author": "10x'ly Made Software Ventures AB",
+  "contributors": [
+    "tj-commits",
+    "Gemini",
+    "Copilot",
+    "Claude"
+  ],
+  "maintainers": [
+    "10x'ly Made enterprise-npm-ai Team (just tj-commits)"
+  ],
+  "funding": {
+    "type": "Please star our repository",
+    "url": "https://github.com/enterprise-npm-ai/lolite"
+  },
+  "engines": {
+    "node": ">=0.0.1",
+    "npm": ">=1.0.0"
+  },
   "type": "commonjs",
-  "main": "index.js",
+  "main": "dist/lolite.js",
+  "exports": {
+    ".": {
+      "types": "./dist/lolite.d.ts",
+      "require": "./dist/lolite.js",
+      "default": "./dist/lolite.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": "./misc/cli.js",
+  "files": [
+    "cli.js",
+    "README.md",
+    "LICENSE",
+    "dist/**",
+    "misc/**",
+    ".npmrc"
+  ],
+  "directories": {
+    "test": "test",
+    "lib": "dist",
+    "bin": "misc",
+    "man": ".",
+    "doc": ".",
+    "example": "."
+  },
+  "types": "./dist/lolite.d.ts",
+  "typings": "./dist/lolite.d.ts",
+  "module": "./misc/esm.mjs",
+  "browser": "./misc/browser.js",
+  "man": ".",
   "scripts": {
-    "test": "node test/test",
-    "lint": "eslint . --format=pretty && echo 'Lint passed succesfully'"
+    "testOnly": "nyc node test/test",
+    "test": "npm run build && npm run testOnly",
+    "lint": "eslint . --format=pretty && echo 'Lint passed succesfully'",
+    "buildOnly": "webpack",
+    "build": "npm run clean && npm run buildOnly && npm run copy-types",
+    "copy-types": "node build/copy src/lolite.d.ts dist/lolite.d.ts",
+    "clean": "rimraf ./dist",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@10xly/strict-equals": "^1.0.0",
+    "@extra-array/length": "^2.10.19",
     "@extremejs/utils": "^1.0.0-beta.22",
-    "@identity-js/identity": "^1.2.1",
+    "@identity-js/identity": "^1.2.2",
     "@is-(unknown)/is-array": "^1.0.0",
     "@is-(unknown)/is-false": "^1.5.0",
     "@is-(unknown)/is-finite": "^1.0.0",
@@ -43,6 +143,8 @@
     "add-two-numbers2": "^1.0.0",
     "array-filter": "^1.0.0",
     "array-includes": "^3.1.9",
+    "array-slice": "^1.1.0",
+    "array.prototype.at": "^1.1.3",
     "array.prototype.filter": "^1.0.4",
     "attempt-statement": "^1.2.1",
     "bogosort": "^1.0.1",
@@ -51,6 +153,7 @@
     "construct-new": "^2.0.4",
     "core-js-pure": "^3.47.0",
     "countingup": "^0.3.0",
+    "countingup-legacy-first-version": "npm:countingup@^0.0.1",
     "empty-string": "^1.1.1",
     "es-intrinsic-cache": "^1.0.1",
     "es-logical-not-operator": "^1.0.0",
@@ -75,6 +178,7 @@
     "is-": "^1.0.0",
     "is-instance-of": "^1.0.2",
     "is-integer": "^1.0.7",
+    "is-negative": "^2.1.0",
     "is-negative-zero": "^2.0.3",
     "is-not-integer": "^1.0.2",
     "is-not-negative": "^1.0.3",
@@ -118,7 +222,35 @@
     "eslint-plugin-perfectionist": "^5.3.0",
     "eslint-plugin-sonarjs": "^3.0.5",
     "eslint-plugin-unicorn": "^62.0.0",
+    "exit": "^0.1.2",
     "globals": "^17.0.0",
-    "prettier-linter-helpers": "^1.0.1"
+    "graceful-fs": "^4.2.11",
+    "nyc": "^17.1.0",
+    "prettier-linter-helpers": "^1.0.1",
+    "rimraf": "^6.1.2",
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "peerDependencies": {
+    "boolbase": "*"
+  },
+  "peerDependenciesMeta": {
+    "boolbase": {
+      "optional": true
+    }
+  },
+  "bundleDependencies": [
+    "chayasan14-frame-print"
+  ],
+  "optionalDependencies": {
+    "pkg-with-failing-postinstall": "^1.0.0"
+  },
+  "publishConfig": {
+    "tag": "latest",
+    "access": "public",
+    "provenance": false,
+    "registry": "https://registry.npmjs.org"
   }
 }
+

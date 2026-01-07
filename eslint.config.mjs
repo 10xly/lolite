@@ -10,7 +10,7 @@ const ninja = fixupPluginRules(ninjaPlugin)
 
 export default [
   {
-    ignores: ["node_modules/**", "stuff/**", "eslint.config.mjs", "test/**"]
+    ignores: ["node_modules/**", "stuff/**", "eslint.config.mjs", "test/**", "webpack.config.js", "dist/**", "build/**"]
   },
   perfectionist.configs["recommended-natural"],
   {

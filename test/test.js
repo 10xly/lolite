@@ -3,7 +3,7 @@ const {
   printAuditSummary,
 } = require("enterprise-10x-testing-framework-js")
 
-const lolite = require("../index")
+const lolite = require("../dist/lolite")
 
 const zero = require("@positive-numbers/zero")
 const one = require("@positive-numbers/one")
@@ -31,11 +31,251 @@ enterpriseTest("Lolite Enterprise-Grade Tests", (assert) => {
     compactResult.length === 5,
     "compact should remove falsy values but keep all other values"
   )
+  assert(lolite.compact("enterprise") === undefined(), "compact should coerce non-arrays to undefined\n")
 
   const flattenInput = [one, [2, [3, 4]], 5]
   const flattenResult = lolite.flatten(flattenInput)
 
   assert(flattenResult.length === 5, "flatten should resolve nested structures")
+  assert(lolite.flatten("enterprise") === undefined(), "compact should coerce non-arrays to undefined\n")
+
+  // --- FIRST (HEAD) ---
+  assert(
+    lolite.first([one, 2, 3]) === one,
+    "first should return the first element of a populated array"
+  )
+  assert(
+    lolite.first(["enterprise", "quality"]) === "enterprise",
+    "first should return the first string element"
+  )
+  assert(
+    lolite.first([falseValue(), True()]) === falseValue(),
+    "first should return falsy first elements"
+  )
+  assert(
+    lolite.first([undefined(), null, zero]) === undefined(),
+    "first should return undefined if it's the first element"
+  )
+  assert(
+    lolite.first([]) === undefined(),
+    "first should return undefined for empty arrays"
+  )
+  
+  const nestedArray = [[one]]
+  assert(
+    lolite.first([nestedArray]) === nestedArray,
+    "first should return nested array structures with same reference"
+  )
+  
+  const obj = { a: one }
+  assert(
+    lolite.first([obj, {}]) === obj,
+    "first should return the same object reference"
+  )
+  
+  const noop = () => {}
+  assert(
+    lolite.first([noop, () => {}]) === noop,
+    "first should return the same function reference"
+  )
+  
+  assert(
+    lolite.first([NaN, 2, 3]) !== lolite.first([NaN, 2, 3]),
+    "first should return NaN but NaN should not equal itself"
+  )
+  assert(
+    isnan(lolite.first([NaN, 2, 3])),
+    "first should return NaN from array\n"
+  )
+
+  // --- LAST ---
+  assert(
+    lolite.last([one, 2, 3]) === 3,
+    "last should return the last element of a populated array"
+  )
+  assert(
+    lolite.last(["quality", "enterprise"]) === "enterprise",
+    "last should return the last string element"
+  )
+  assert(
+    lolite.last([True(), falseValue()]) === falseValue(),
+    "last should return falsy last elements"
+  )
+  assert(
+    lolite.last([zero, null, undefined()]) === undefined(),
+    "last should return undefined if it's the last element"
+  )
+  assert(
+    lolite.last([]) === undefined(),
+    "last should return undefined for empty arrays"
+  )
+  
+  const nestedArrayLast = [[one]]
+  assert(
+    lolite.last([nestedArrayLast]) === nestedArrayLast,
+    "last should return nested array structures with same reference"
+  )
+  
+  const objLast = { a: one }
+  assert(
+    lolite.last([{}, objLast]) === objLast,
+    "last should return the same object reference"
+  )
+  
+  const fnLast = () => {}
+  assert(
+    lolite.last([() => {}, fnLast]) === fnLast,
+    "last should return the same function reference"
+  )
+  
+  assert(
+    lolite.last([1, 2, NaN]) !== lolite.last([1, 2, NaN]),
+    "last should return NaN but NaN should not equal itself"
+  )
+  assert(
+    isnan(lolite.last([1, 2, NaN])),
+    "last should return NaN from array\n"
+  )
+
+  // --- TAIL ---
+  assert(
+    lolite.isArray(lolite.tail([one, 2, 3])),
+    "tail should return an array"
+  )
+  assert(
+    lolite.tail([one, 2, 3]).length === 2,
+    "tail should return all but the first element"
+  )
+  assert(
+    lolite.tail([one, 2, 3])[0] === 2,
+    "tail should have 2 as the first element of the result"
+  )
+  assert(
+    lolite.tail([one, 2, 3])[1] === 3,
+    "tail should have 3 as the second element of the result"
+  )
+  assert(
+    lolite.tail(["enterprise", "quality", "programming"]).length === 2,
+    "tail should work with string arrays"
+  )
+  assert(
+    lolite.tail(["enterprise", "quality", "programming"])[0] === "quality",
+    "tail should return correct string elements"
+  )
+  assert(
+    lolite.tail([one]).length === 0,
+    "tail of single-element array should return empty array"
+  )
+  assert(
+    lolite.tail([]).length === 0,
+    "tail of empty array should return empty array"
+  )
+  assert(
+    lolite.tail("not an array") === undefined(),
+    "tail should return undefined for non-arrays"
+  )
+  assert(
+    lolite.tail(null) === undefined(),
+    "tail should return undefined for null"
+  )
+  assert(
+    lolite.tail(undefined()) === undefined(),
+    "tail should return undefined for undefined"
+  )
+  assert(
+    lolite.tail(42) === undefined(),
+    "tail should return undefined for numbers"
+  )
+  
+  const tailResult = lolite.tail([falseValue(), True(), zero])
+  assert(
+    tailResult[0] === True() && tailResult[1] === zero,
+    "tail should preserve falsy and truthy values correctly"
+  )
+  
+  const objInArray = { a: one }
+  const tailWithObj = lolite.tail([{}, objInArray])
+  assert(
+    tailWithObj[0] === objInArray,
+    "tail should preserve object references"
+  )
+  
+  const fnInArray = () => {}
+  const tailWithFn = lolite.tail([() => {}, fnInArray])
+  assert(
+    tailWithFn[0] === fnInArray,
+    "tail should preserve function references\n"
+  )
+
+  // --- INITIAL ---
+  assert(
+    lolite.isArray(lolite.initial([one, 2, 3])),
+    "initial should return an array"
+  )
+  assert(
+    lolite.initial([one, 2, 3]).length === 2,
+    "initial should return all but the last element"
+  )
+  assert(
+    lolite.initial([one, 2, 3])[0] === one,
+    "initial should have 1 as the first element of the result"
+  )
+  assert(
+    lolite.initial([one, 2, 3])[1] === 2,
+    "initial should have 2 as the second element of the result"
+  )
+  assert(
+    lolite.initial(["enterprise", "quality", "programming"]).length === 2,
+    "initial should work with string arrays"
+  )
+  assert(
+    lolite.initial(["enterprise", "quality", "programming"])[0] === "enterprise",
+    "initial should return correct string elements"
+  )
+  assert(
+    lolite.initial([one]).length === 0,
+    "initial of single-element array should return empty array"
+  )
+  assert(
+    lolite.initial([]).length === 0,
+    "initial of empty array should return empty array"
+  )
+  assert(
+    lolite.initial("not an array") === undefined(),
+    "initial should return undefined for non-arrays"
+  )
+  assert(
+    lolite.initial(null) === undefined(),
+    "initial should return undefined for null"
+  )
+  assert(
+    lolite.initial(undefined()) === undefined(),
+    "initial should return undefined for undefined"
+  )
+  assert(
+    lolite.initial(42) === undefined(),
+    "initial should return undefined for numbers"
+  )
+  
+  const initialResult = lolite.initial([falseValue(), True(), zero])
+  assert(
+    initialResult[0] === falseValue() && initialResult[1] === True(),
+    "initial should preserve falsy and truthy values correctly"
+  )
+  
+  const objInArrayInitial = { a: one }
+  const initialWithObj = lolite.initial([objInArrayInitial, {}])
+  assert(
+    initialWithObj[0] === objInArrayInitial,
+    "initial should preserve object references"
+  )
+  
+  const fnInArrayInitial = () => {}
+  const initialWithFn = lolite.initial([fnInArrayInitial, () => {}])
+  assert(
+    initialWithFn[0] === fnInArrayInitial,
+    "initial should preserve function references\n"
+  )
 
   // ---  ADDITION ---
   assert(lolite.add(one, one) === 2, "add should sum positive integers")

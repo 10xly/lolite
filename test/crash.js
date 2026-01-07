@@ -1,1 +1,1 @@
-require("../private/crache")()
+require("../src/private/crash")()
