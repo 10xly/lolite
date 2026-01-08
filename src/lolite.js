@@ -64,7 +64,11 @@ const lolite = {
   
   noop: require("./lib/noop"),
   identity: require("./lib/identity"),
-  constant: require("./lib/constant")
+  constant: require("./lib/constant"),
+  stubUndefined: require("./lib/stubUndefined"),
+  stubNull: require("./lib/stubNull"),
+  stubTrue: require("./lib/stubTrue"),
+  stubFalse: require("./lib/stubFalse")
 }
 
 module.exports = lolite

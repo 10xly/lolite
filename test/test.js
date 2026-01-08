@@ -1632,6 +1632,94 @@ enterpriseTest("Lolite Enterprise-Grade Tests", (assert) => {
     cNull() === null,
     "constant should return a function that returns null unchanged"
   )
+
+  // --- STUB UNDEFINED ---
+  assert(
+    lolite.isFunction(lolite.stubUndefined),
+    "stubUndefined should be a function"
+  )
+  assert(
+    lolite.stubUndefined() === undefined(),
+    "stubUndefined should return undefined"
+  )
+  assert(
+    lolite.stubUndefined(1, 2, 3) === undefined(),
+    "stubUndefined should ignore arguments and return undefined"
+  )
+  assert(
+    lolite.stubUndefined("anything") === undefined(),
+    "stubUndefined should always return undefined regardless of input"
+  )
+  assert(
+    lolite.stubUndefined(null) === undefined(),
+    "stubUndefined should return undefined even when passed null\n"
+  )
+
+  // --- STUB NULL ---
+  assert(
+    lolite.isFunction(lolite.stubNull),
+    "stubNull should be a function"
+  )
+  assert(
+    lolite.stubNull() === null,
+    "stubNull should return null"
+  )
+  assert(
+    lolite.stubNull(1, 2, 3) === null,
+    "stubNull should ignore arguments and return null"
+  )
+  assert(
+    lolite.stubNull("anything") === null,
+    "stubNull should always return null regardless of input"
+  )
+  assert(
+    lolite.stubNull(undefined()) === null,
+    "stubNull should return null even when passed undefined\n"
+  )
+
+  // --- STUB TRUE ---
+  assert(
+    lolite.isFunction(lolite.stubTrue),
+    "stubTrue should be a function"
+  )
+  assert(
+    lolite.stubTrue() === True(),
+    "stubTrue should return true"
+  )
+  assert(
+    lolite.stubTrue(1, 2, 3) === True(),
+    "stubTrue should ignore arguments and return true"
+  )
+  assert(
+    lolite.stubTrue("anything") === True(),
+    "stubTrue should always return true regardless of input"
+  )
+  assert(
+    lolite.stubTrue(falseValue()) === True(),
+    "stubTrue should return true even when passed false\n"
+  )
+
+  // --- STUB FALSE ---
+  assert(
+    lolite.isFunction(lolite.stubFalse),
+    "stubFalse should be a function"
+  )
+  assert(
+    lolite.stubFalse() === falseValue(),
+    "stubFalse should return false"
+  )
+  assert(
+    lolite.stubFalse(1, 2, 3) === falseValue(),
+    "stubFalse should ignore arguments and return false"
+  )
+  assert(
+    lolite.stubFalse("anything") === falseValue(),
+    "stubFalse should always return false regardless of input"
+  )
+  assert(
+    lolite.stubFalse(True()) === falseValue(),
+    "stubFalse should return false even when passed true\n"
+  )
 })
 
 printAuditSummary()

@@ -1,7 +1,7 @@
 {
   "name": "lolite",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.  ",
   "description": "The 10x Utility Library",
   "keywords": [
     "lolite",
@@ -85,14 +85,6 @@
   },
   "type": "commonjs",
   "main": "dist/lolite.js",
-  "exports": {
-    ".": {
-      "types": "./dist/lolite.d.ts",
-      "require": "./dist/lolite.js",
-      "default": "./dist/lolite.js"
-    },
-    "./package.json": "./package.json"
-  },
   "bin": "./misc/cli.js",
   "files": [
     "cli.js",
@@ -154,6 +146,7 @@
     "core-js-pure": "^3.47.0",
     "countingup": "^0.3.0",
     "countingup-legacy-first-version": "npm:countingup@^0.0.1",
+    "date": "^2.0.6",
     "empty-string": "^1.1.1",
     "es-intrinsic-cache": "^1.0.1",
     "es-logical-not-operator": "^1.0.0",
@@ -253,4 +246,3 @@
     "registry": "https://registry.npmjs.org"
   }
 }
-

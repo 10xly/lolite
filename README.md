@@ -887,6 +887,23 @@ const returnEnterprise = lolite.constant("enterprise")
 console.log(returnEnterprise()) // "enterprise"
 ```
 
+### stubUndefined()
+Returns the primitive value undefined.
+
+### stubTrue()
+Returns the primitive boolean value true.
+```javascript
+const lolite = require("lolite")
+console.log(lolite.stubTrue()) // true
+```
+
+### stubFalse()
+Returns the primitive boolean value false.
+```javascript
+const lolite = require("lolite")
+console.log(lolite.stubFalse()) // false
+```
+
 # EXTENDED DOCUMENTATION
 LoLite contains some private utilities in its code that it uses internally. You probably don't want to use these, unless you have a really good reason to. You must require them manually with the require path.
 
@@ -915,6 +932,14 @@ It will also create a crash dump file with a filename like `crash_3989.bin` in y
 Note: you can also require `lolite/test/crash` and it will immediately crash the program, like this:
 ```javascript
 require("lolite/test/crash") // crashes program
+```
+
+### `date.js`
+A file that just exports the `Date` constructor.
+```javascript
+const $Date = require("lolite/src/private/date")
+const assert = require("node:assert")
+assert.ok($Date === Date)
 ```
 
 ### `invertFallback.js`

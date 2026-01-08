@@ -365,11 +365,11 @@ module.exports = divide
   \**************************/
 (module, __unused_webpack_exports, __webpack_require__) {
 
-const trueValue = __webpack_require__(/*! true-value */ "true-value")
 const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
 const isArray = __webpack_require__(/*! ./isArray */ "./src/lib/isArray.js")
 // eslint-disable-next-line sonarjs/no-globals-shadowing, no-shadow-restricted-names, no-undefined
 const { undefined } = __webpack_require__(/*! undefined-is-a-function */ "undefined-is-a-function")
+const stubTrue = __webpack_require__(/*! ./stubTrue */ "./src/lib/stubTrue.js")
 
 function first(array) {
   if (not(isArray(array))) {
@@ -377,7 +377,7 @@ function first(array) {
     return undefined()
   }
   // eslint-disable-next-line unicorn/no-array-callback-reference
-  return array.find(trueValue)
+  return array.find(stubTrue)
 }
 
 module.exports = first
@@ -2034,6 +2034,71 @@ module.exports = sign
 
 /***/ },
 
+/***/ "./src/lib/stubFalse.js"
+/*!******************************!*\
+  !*** ./src/lib/stubFalse.js ***!
+  \******************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+// eslint-disable-next-line no-inline-comments
+const [/*********/, FALSE] = __webpack_require__(/*! ../private/arrayOfAllBooleans */ "./src/private/arrayOfAllBooleans.js")
+const constant = __webpack_require__(/*! ./constant */ "./src/lib/constant.js"),
+  stubFalse = constant(FALSE)
+
+module.exports = stubFalse
+
+/***/ },
+
+/***/ "./src/lib/stubNull.js"
+/*!*****************************!*\
+  !*** ./src/lib/stubNull.js ***!
+  \*****************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+const $Date = __webpack_require__(/*! ../private/date */ "./src/private/date.js")
+const construct = __webpack_require__(/*! construct-new */ "construct-new")
+const nan = __webpack_require__(/*! nan-is-a-function */ "nan-is-a-function")
+const toJSON = __webpack_require__(/*! date/Date.prototype.toJSON */ "date/Date.prototype.toJSON")
+
+function stubNull() {
+  const date = construct({
+    args: [nan()],
+    target: $Date
+  })
+  return toJSON(date)
+}
+
+module.exports = stubNull
+
+/***/ },
+
+/***/ "./src/lib/stubTrue.js"
+/*!*****************************!*\
+  !*** ./src/lib/stubTrue.js ***!
+  \*****************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+const [TRUE] = __webpack_require__(/*! ../private/arrayOfAllBooleans */ "./src/private/arrayOfAllBooleans.js")
+const constant = __webpack_require__(/*! ./constant */ "./src/lib/constant.js"),
+  stubTrue = constant(TRUE)
+
+module.exports = stubTrue
+
+/***/ },
+
+/***/ "./src/lib/stubUndefined.js"
+/*!**********************************!*\
+  !*** ./src/lib/stubUndefined.js ***!
+  \**********************************/
+(module) {
+
+module.exports = function stubUndefined() {
+  // eslint-disable-next-line no-void, sonarjs/void-use, require-unicode-regexp
+  return void /undefined/
+}
+
+/***/ },
+
 /***/ "./src/lib/subtract.js"
 /*!*****************************!*\
   !*** ./src/lib/subtract.js ***!
@@ -2332,7 +2397,11 @@ const lolite = {
   
   noop: __webpack_require__(/*! ./lib/noop */ "./src/lib/noop.js"),
   identity: __webpack_require__(/*! ./lib/identity */ "./src/lib/identity.js"),
-  constant: __webpack_require__(/*! ./lib/constant */ "./src/lib/constant.js")
+  constant: __webpack_require__(/*! ./lib/constant */ "./src/lib/constant.js"),
+  stubUndefined: __webpack_require__(/*! ./lib/stubUndefined */ "./src/lib/stubUndefined.js"),
+  stubNull: __webpack_require__(/*! ./lib/stubNull */ "./src/lib/stubNull.js"),
+  stubTrue: __webpack_require__(/*! ./lib/stubTrue */ "./src/lib/stubTrue.js"),
+  stubFalse: __webpack_require__(/*! ./lib/stubFalse */ "./src/lib/stubFalse.js"),
 }
 
 module.exports = lolite
@@ -2378,6 +2447,16 @@ function crash_program() {
 
 // eslint-disable-next-line camelcase
 module.exports = crash_program
+
+/***/ },
+
+/***/ "./src/private/date.js"
+/*!*****************************!*\
+  !*** ./src/private/date.js ***!
+  \*****************************/
+(module) {
+
+module.exports = Date
 
 /***/ },
 
@@ -2744,6 +2823,17 @@ module.exports = require("countingup");
 
 "use strict";
 module.exports = require("countingup-legacy-first-version/lib/index");
+
+/***/ },
+
+/***/ "date/Date.prototype.toJSON"
+/*!*********************************************!*\
+  !*** external "date/Date.prototype.toJSON" ***!
+  \*********************************************/
+(module) {
+
+"use strict";
+module.exports = require("date/Date.prototype.toJSON");
 
 /***/ },
 

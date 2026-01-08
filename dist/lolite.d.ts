@@ -424,3 +424,27 @@ export function identity<T>(value: T): T
  * @returns A function that returns the value
  */
 export function constant<T>(value: T): () => T
+
+/**
+ * Returns undefined.
+ * @returns Undefined
+ */
+export function stubUndefined(): undefined
+
+/**
+ * Returns null.
+ * @returns Null
+ */
+export function stubNull(): null
+
+/**
+ * Returns true.
+ * @returns True
+ */
+export function stubTrue(): boolean
+
+/**
+ * Returns false.
+ * @returns False
+ */
+export function stubFalse(): boolean
