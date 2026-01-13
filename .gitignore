@@ -2,3 +2,5 @@ node_modules
 stuff
 t.js
 .nyc_output
+t.txt
+test.json

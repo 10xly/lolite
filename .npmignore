@@ -1,6 +1,5 @@
 stuff
 t.js
-src/
 webpack.config.js
 test/
 .git/
@@ -8,3 +7,5 @@ node_modules/
 build/
 .nyc_output/
 .github/
+t.txt
+test.json
