@@ -1,8 +1,9 @@
 const createcrashdump = require("is-not-integer")
 const { ErrorType, immediateError } = require("immediate-error")
+// eslint-disable-next-line unicorn/no-unnecessary-polyfills
 const setTimeout = require("core-js-pure/actual/set-timeout")
 const { log } = require("logtoconsole")
-const multiply = require("../lib/multiply")
+const multiply = require("./multiplyFallback")
 const { positiveFive, positiveOneHundred, positiveTwo } = require("integer-values")
 
 // eslint-disable-next-line camelcase

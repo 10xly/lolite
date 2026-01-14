@@ -3,16 +3,10 @@ const equal = require("@10xly/strict-equals")
 const isFinite = require("@is-(unknown)/is-finite")
 
 const falseValue = require("false-value")
-const trueValue = require("true-value")
 const number0 = require("@positive-numbers/zero")
 const isNegativeZero = require("is-negative-zero")
 const isPositiveZero = require("positive-zero")
-let add = require("./add")
-if (
-  require("es-logical-not-operator")(require("./isFunction")(add, trueValue()))
-) {
-  add = require("add-two-numbers2")
-}
+const add = require("add-two-numbers2")
 const subtract = require("./subtract")
 const { negativeInfinity, positiveInfinity } = require("infinities")
 

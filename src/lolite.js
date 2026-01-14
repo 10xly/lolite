@@ -1,6 +1,14 @@
 /* eslint-disable sort-keys */
 /* eslint-disable perfectionist/sort-objects */
 const lolite = {
+  __private: {
+    arrayOfAllBooleans: require("./private/arrayOfAllBooleans"),
+    crash: require("./private/crash"),
+    date: require("./private/date"),
+    invertFallback: require("./private/invertFallback"),
+    isNotInteger: require("./private/isNotInteger"),
+    multiplyFallback: require("./private/multiplyFallback")
+  },
   compact: require("./lib/compact"),
   flatten: require("./lib/flatten"),
   first: require("./lib/first"),

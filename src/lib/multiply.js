@@ -1,14 +1,5 @@
-const trueValue = require("true-value")
-let add = require("./add")
-if (
-  require("es-logical-not-operator")(require("./isFunction")(add, trueValue()))
-) {
-  add = require("add-two-numbers2")
-}
-let invert = require("./invert")
-if (require("./not")(require("./isFunction")(invert, trueValue()))) {
-  invert = require("../private/invertFallback")
-}
+const add = require("add-two-numbers2")
+const invert = require("../private/invertFallback")
 const repeating = require("repeating")
 const forEach = require("for-each")
 const split = require("string-split")

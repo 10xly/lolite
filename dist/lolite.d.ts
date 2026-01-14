@@ -1,6 +1,17 @@
 // Type definitions for LoLite
 // Project: https://github.com/enterprise-npm-ai/lolite
 
+declare interface PrivateUtils {
+  arrayOfAllBooleans: boolean[]
+  crash: () => never
+  date: DateConstructor
+  invertFallback: (value: number) => number
+  isNotInteger: (value: any) => boolean
+  multiplyFallback: (multiplier: number, multiplicand: number) => number
+}
+
+export const __private: PrivateUtils
+
 /**
  * Removes all falsy values from an array.
  * @param array - The array to compact

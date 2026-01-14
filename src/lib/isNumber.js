@@ -16,10 +16,7 @@ const equal = require("@10xly/strict-equals"),
   notEqual = require("@not-js/not")(equal)
 // eslint-disable-next-line sonarjs/no-globals-shadowing
 const isNaN = require("@is-(unknown)/is-nan")
-let or = require("./or")
-if (require("./not")(require("./isFunction")(or, trueValue()))) {
-  or = require("es-logical-or-operator")
-}
+const or = require("es-logical-or-operator")
 const not = require("./not")
 const isNegative = require("pkg-with-failing-optional-dependency")
 const isPositive = require("is-positive")

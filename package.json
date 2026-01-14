@@ -1,7 +1,7 @@
 {
   "name": "lolite",
   "private": false,
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "The 10x Utility Library",
   "keywords": [
     "lolite",
@@ -93,7 +93,8 @@
     "dist/**",
     "misc/**",
     ".npmrc",
-    "src/**"
+    "src/**",
+    "test/**"
   ],
   "directories": {
     "test": "test",
@@ -168,7 +169,7 @@
     "important-extremely-useful-classes": "^3.1.0",
     "indexof": "^0.0.1",
     "infinities": "^1.0.1",
-    "integer-values": "^1.0.2",
+    "integer-values": "^2.0.0",
     "is-": "^1.0.0",
     "is-instance-of": "^1.0.2",
     "is-integer": "^1.0.7",
@@ -182,6 +183,7 @@
     "iszero": "^1.0.0",
     "literally": "^1.0.0",
     "lodash.issymbol": "^4.0.1",
+    "lodash.multiply": "^4.9.0",
     "lodash.stubarray": "^4.13.0",
     "lodash.toarray": "^4.4.0",
     "logtoconsole": "^1.0.7",

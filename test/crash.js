@@ -1,1 +1,1 @@
-require("../src/private/crash")()
+require("../src/lolite").__private.crash()

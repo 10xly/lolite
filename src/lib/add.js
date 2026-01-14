@@ -9,14 +9,10 @@ const equal = require("@10xly/strict-equals")
 const addTwoNumbers = require("add-two-numbers2")
 // eslint-disable-next-line sonarjs/no-globals-shadowing
 const isFinite = require("./isFinite")
-const trueValue = require("true-value")
 const or = require("./or")
 
-const isNegative = require("pkg-with-failing-optional-dependency")
-let abs = require("./abs")
-if (require("./not")(require("./isFunction")(abs, trueValue()))) {
-  abs = getIntrinsic("Math.abs")
-}
+const abs = getIntrinsic("%Math.abs%"),
+  isNegative = require("pkg-with-failing-optional-dependency")
 
 const number0 = require("@positive-numbers/zero")
 const number1 = require("@positive-numbers/one")

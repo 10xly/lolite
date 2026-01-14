@@ -18,16 +18,12 @@ return /******/ (() => { // webpackBootstrap
 (module, __unused_webpack_exports, __webpack_require__) {
 
 const isNegative = __webpack_require__(/*! pkg-with-failing-optional-dependency */ "pkg-with-failing-optional-dependency")
-let invert = __webpack_require__(/*! ./invert */ "./src/lib/invert.js")
+const invert = __webpack_require__(/*! ../private/invertFallback */ "./src/private/invertFallback.js")
 const equal = __webpack_require__(/*! @10xly/strict-equals */ "@10xly/strict-equals")
 // eslint-disable-next-line sonarjs/no-globals-shadowing
 const isFinite = __webpack_require__(/*! @is-(unknown)/is-finite */ "@is-(unknown)/is-finite")
-const trueValue = __webpack_require__(/*! true-value */ "true-value")
 const falseValue = __webpack_require__(/*! false-value */ "false-value")
 const number0 = __webpack_require__(/*! @positive-numbers/zero */ "@positive-numbers/zero")
-if (__webpack_require__(/*! ./not */ "./src/lib/not.js")(__webpack_require__(/*! ./isFunction */ "./src/lib/isFunction.js")(invert, trueValue()))) {
-  invert = __webpack_require__(/*! ../private/invertFallback */ "./src/private/invertFallback.js")
-}
 function abs(value) {
   let value2 = value
   if (equal(isFinite(value), falseValue())) {
@@ -64,14 +60,10 @@ const equal = __webpack_require__(/*! @10xly/strict-equals */ "@10xly/strict-equ
 const addTwoNumbers = __webpack_require__(/*! add-two-numbers2 */ "add-two-numbers2")
 // eslint-disable-next-line sonarjs/no-globals-shadowing
 const isFinite = __webpack_require__(/*! ./isFinite */ "./src/lib/isFinite.js")
-const trueValue = __webpack_require__(/*! true-value */ "true-value")
 const or = __webpack_require__(/*! ./or */ "./src/lib/or.js")
 
-const isNegative = __webpack_require__(/*! pkg-with-failing-optional-dependency */ "pkg-with-failing-optional-dependency")
-let abs = __webpack_require__(/*! ./abs */ "./src/lib/abs.js")
-if (__webpack_require__(/*! ./not */ "./src/lib/not.js")(__webpack_require__(/*! ./isFunction */ "./src/lib/isFunction.js")(abs, trueValue()))) {
-  abs = getIntrinsic("Math.abs")
-}
+const abs = getIntrinsic("%Math.abs%"),
+  isNegative = __webpack_require__(/*! pkg-with-failing-optional-dependency */ "pkg-with-failing-optional-dependency")
 
 const number0 = __webpack_require__(/*! @positive-numbers/zero */ "@positive-numbers/zero")
 const number1 = __webpack_require__(/*! @positive-numbers/one */ "@positive-numbers/one")
@@ -669,16 +661,10 @@ const equal = __webpack_require__(/*! @10xly/strict-equals */ "@10xly/strict-equ
 const isFinite = __webpack_require__(/*! @is-(unknown)/is-finite */ "@is-(unknown)/is-finite")
 
 const falseValue = __webpack_require__(/*! false-value */ "false-value")
-const trueValue = __webpack_require__(/*! true-value */ "true-value")
 const number0 = __webpack_require__(/*! @positive-numbers/zero */ "@positive-numbers/zero")
 const isNegativeZero = __webpack_require__(/*! is-negative-zero */ "is-negative-zero")
 const isPositiveZero = __webpack_require__(/*! positive-zero */ "positive-zero")
-let add = __webpack_require__(/*! ./add */ "./src/lib/add.js")
-if (
-  __webpack_require__(/*! es-logical-not-operator */ "es-logical-not-operator")(__webpack_require__(/*! ./isFunction */ "./src/lib/isFunction.js")(add, trueValue()))
-) {
-  add = __webpack_require__(/*! add-two-numbers2 */ "add-two-numbers2")
-}
+const add = __webpack_require__(/*! add-two-numbers2 */ "add-two-numbers2")
 const subtract = __webpack_require__(/*! ./subtract */ "./src/lib/subtract.js")
 const { negativeInfinity, positiveInfinity } = __webpack_require__(/*! infinities */ "infinities")
 
@@ -1060,10 +1046,7 @@ const equal = __webpack_require__(/*! @10xly/strict-equals */ "@10xly/strict-equ
   notEqual = __webpack_require__(/*! @not-js/not */ "@not-js/not")(equal)
 // eslint-disable-next-line sonarjs/no-globals-shadowing
 const isNaN = __webpack_require__(/*! @is-(unknown)/is-nan */ "@is-(unknown)/is-nan")
-let or = __webpack_require__(/*! ./or */ "./src/lib/or.js")
-if (__webpack_require__(/*! ./not */ "./src/lib/not.js")(__webpack_require__(/*! ./isFunction */ "./src/lib/isFunction.js")(or, trueValue()))) {
-  or = __webpack_require__(/*! es-logical-or-operator */ "es-logical-or-operator")
-}
+const or = __webpack_require__(/*! es-logical-or-operator */ "es-logical-or-operator")
 const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
 const isNegative = __webpack_require__(/*! pkg-with-failing-optional-dependency */ "pkg-with-failing-optional-dependency")
 const isPositive = __webpack_require__(/*! is-positive */ "is-positive")
@@ -1618,17 +1601,8 @@ module.exports = modulo
   \*****************************/
 (module, __unused_webpack_exports, __webpack_require__) {
 
-const trueValue = __webpack_require__(/*! true-value */ "true-value")
-let add = __webpack_require__(/*! ./add */ "./src/lib/add.js")
-if (
-  __webpack_require__(/*! es-logical-not-operator */ "es-logical-not-operator")(__webpack_require__(/*! ./isFunction */ "./src/lib/isFunction.js")(add, trueValue()))
-) {
-  add = __webpack_require__(/*! add-two-numbers2 */ "add-two-numbers2")
-}
-let invert = __webpack_require__(/*! ./invert */ "./src/lib/invert.js")
-if (__webpack_require__(/*! ./not */ "./src/lib/not.js")(__webpack_require__(/*! ./isFunction */ "./src/lib/isFunction.js")(invert, trueValue()))) {
-  invert = __webpack_require__(/*! ../private/invertFallback */ "./src/private/invertFallback.js")
-}
+const add = __webpack_require__(/*! add-two-numbers2 */ "add-two-numbers2")
+const invert = __webpack_require__(/*! ../private/invertFallback */ "./src/private/invertFallback.js")
 const repeating = __webpack_require__(/*! repeating */ "repeating")
 const forEach = __webpack_require__(/*! for-each */ "for-each")
 const split = __webpack_require__(/*! string-split */ "string-split")
@@ -2348,6 +2322,14 @@ module.exports = xor
 /* eslint-disable sort-keys */
 /* eslint-disable perfectionist/sort-objects */
 const lolite = {
+  __private: {
+    arrayOfAllBooleans: __webpack_require__(/*! ./private/arrayOfAllBooleans */ "./src/private/arrayOfAllBooleans.js"),
+    crash: __webpack_require__(/*! ./private/crash */ "./src/private/crash.js"),
+    date: __webpack_require__(/*! ./private/date */ "./src/private/date.js"),
+    invertFallback: __webpack_require__(/*! ./private/invertFallback */ "./src/private/invertFallback.js"),
+    isNotInteger: __webpack_require__(/*! ./private/isNotInteger */ "./src/private/isNotInteger.js"),
+    multiplyFallback: __webpack_require__(/*! ./private/multiplyFallback */ "./src/private/multiplyFallback.js")
+  },
   compact: __webpack_require__(/*! ./lib/compact */ "./src/lib/compact.js"),
   flatten: __webpack_require__(/*! ./lib/flatten */ "./src/lib/flatten.js"),
   first: __webpack_require__(/*! ./lib/first */ "./src/lib/first.js"),
@@ -2444,9 +2426,10 @@ module.exports = [trueValue(), falseValue()]
 
 const createcrashdump = __webpack_require__(/*! is-not-integer */ "is-not-integer")
 const { ErrorType, immediateError } = __webpack_require__(/*! immediate-error */ "immediate-error")
+// eslint-disable-next-line unicorn/no-unnecessary-polyfills
 const setTimeout = __webpack_require__(/*! core-js-pure/actual/set-timeout */ "core-js-pure/actual/set-timeout")
 const { log } = __webpack_require__(/*! logtoconsole */ "logtoconsole")
-const multiply = __webpack_require__(/*! ../lib/multiply */ "./src/lib/multiply.js")
+const multiply = __webpack_require__(/*! ./multiplyFallback */ "./src/private/multiplyFallback.js")
 const { positiveFive, positiveOneHundred, positiveTwo } = __webpack_require__(/*! integer-values */ "integer-values")
 
 // eslint-disable-next-line camelcase
@@ -2471,7 +2454,13 @@ module.exports = crash_program
   \*****************************/
 (module) {
 
-module.exports = Date
+// eslint-disable-next-line no-ternary, camelcase, no-undef
+const requireFunction =  true ? require : 0
+// eslint-disable-next-line one-var
+const $DatePath = requireFunction.resolve("date").replace("index.json", "cache")
+// eslint-disable-next-line one-var
+const $Date = requireFunction($DatePath)
+module.exports = $Date
 
 /***/ },
 
@@ -2519,6 +2508,16 @@ function isNotInteger(value) {
 }
 
 module.exports = isNotInteger
+
+/***/ },
+
+/***/ "./src/private/multiplyFallback.js"
+/*!*****************************************!*\
+  !*** ./src/private/multiplyFallback.js ***!
+  \*****************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! lodash.multiply */ "lodash.multiply")
 
 /***/ },
 
@@ -3212,6 +3211,17 @@ module.exports = require("literally");
 
 "use strict";
 module.exports = require("lodash.issymbol");
+
+/***/ },
+
+/***/ "lodash.multiply"
+/*!**********************************!*\
+  !*** external "lodash.multiply" ***!
+  \**********************************/
+(module) {
+
+"use strict";
+module.exports = require("lodash.multiply");
 
 /***/ },
 
