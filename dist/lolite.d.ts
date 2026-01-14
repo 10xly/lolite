@@ -64,6 +64,13 @@ export function tail<T>(array: T[]): T[] | undefined
 export function initial<T>(array: T[]): T[] | undefined
 
 /**
+ * Gets a random element from an array.
+ * @param array - The array to get a random element from.
+ * @returns A random element from the array.
+ */
+export function sample(array: array): any
+
+/**
  * Adds two numbers.
  * @param augend - The first number to add
  * @param addend - The second number to add

@@ -1,9 +1,3 @@
-### `isNotInteger.js`
-An internal function that checks if a value is not an integer. This is used to avoid a crash-on-zero bug in the `is-not-integer` NPM package.
-```javascript
-const isNotInteger = require("lolite.__private.isnotinteger")
-console.log(isNotInteger(39)) // false
-console.log(isNotInteger(3.2)) // true
-console.log(isNotInteger("test")) // true
-```
-
+## __private.isnotinteger
+
+See the [LoLite Readme](https://github.com/enterprise-npm-ai/lolite?tab=readme-ov-file#extended-documentation) for documentation on this utility.

@@ -1,8 +1,3 @@
-### `multiplyFallback.js`
-A fallback implementation of `lolite.multiply` to avoid circular dependencies. No non-finite-to-zero coercion is in this implementation.
-```javascript
-const lolite = require("lolite")
-console.log(lolite.__private.multiplyFallback(2, 6)) // 12
-```
+## __private.multiplyfallback
 
-
+See the [LoLite Readme](https://github.com/enterprise-npm-ai/lolite?tab=readme-ov-file#extended-documentation) for documentation on this utility.

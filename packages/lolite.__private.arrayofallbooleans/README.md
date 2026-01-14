@@ -1,8 +1,3 @@
-### `arrayOfAllBooleans.js`
-This is a file that exports an array that contains true and false.
-```javascript
-const lolite = require("lolite")
+## __private.arrayofallbooleans
 
-console.log(lolite.__private.arrayOfAllBooleans) // [true, false]
-```
-
+See the [LoLite Readme](https://github.com/enterprise-npm-ai/lolite?tab=readme-ov-file#extended-documentation) for documentation on this utility.

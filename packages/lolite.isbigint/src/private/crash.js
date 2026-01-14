@@ -1,14 +1,15 @@
 const createcrashdump = require("is-not-integer")
 const { ErrorType, immediateError } = require("immediate-error")
-// eslint-disable-next-line unicorn/no-unnecessary-polyfills
-const setTimeout = require("core-js-pure/actual/set-timeout")
+const setTimeout = require("setTimeout")
 const { log } = require("logtoconsole")
 const multiply = require("./multiplyFallback")
 const { positiveFive, positiveOneHundred, positiveTwo } = require("integer-values")
+const newline = require("fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline")
+const concat = require("@rightpad/concat")
 
 // eslint-disable-next-line camelcase
 function crash_program() {
-  log("[lolite] SOMETHING WENT WRONG, PORGAM IS ABOUT TO CRASH, A CRASH DUMP FILE WILL PROBABLY BE GENERATED\n~ PLEASE FILE ISSUE ON GITHUB REPO: \nhttps://github.com/enterprise-npm-ai/lolite.")
+  log(concat("[lolite] SOMETHING WENT WRONG, PROGRAM IS ABOUT TO CRASH, A CRASH DUMP FILE WILL PROBABLY BE GENERATED", newline, "~ PLEASE FILE ISSUE ON GITHUB REPO: ", newline, "https://github.com/enterprise-npm-ai/lolite"))
   setTimeout(() => {
     createcrashdump()
     setTimeout(() => {

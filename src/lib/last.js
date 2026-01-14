@@ -2,6 +2,7 @@ const not = require("./not")
 const isArray = require("./isArray")
 // eslint-disable-next-line sonarjs/no-globals-shadowing, no-shadow-restricted-names, no-undefined
 const { undefined } = require("undefined-is-a-function")
+// eslint-disable-next-line unicorn/no-unnecessary-polyfills
 const at = require("array.prototype.at")
 const isBoolean = require("./isBoolean")
 

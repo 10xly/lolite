@@ -179,6 +179,15 @@ const undef = lolite.tail(null)
 // result: undefined
 ```
 
+### sample(array)
+Gets a random element from an array. Returns undefined for non-arrays.
+```js
+const lolite = require("lolite")
+console.log(lolite.sample(139)) // undefined
+console.log(typeof lolite.sample([1, 2, 3])) // "number"
+console.log(typeof lolite.sample(["h", "g", "r"])) // "string"
+```
+
 ---
 
 ## MATH UTILITIES
@@ -512,7 +521,7 @@ console.log(lolite.nor(false, true)) // false
 console.log(lolite.nor(true, true)) // false
 ```
 
-### `xor(a, b)`
+### xor(a, b)
 Like `or`, but if `a` and `b` are both truthy, or if `a` and `b` are both falsy, returns `false`.
 
 ```javascript
@@ -530,7 +539,7 @@ console.log(lolite.xor(testTruthyValue, testTruthyValue)) // false
 console.log(lolite.xor(testFalsyValue, testFalsyValue)) // false
 ```
 
-### `xnor(a, b)`
+### xnor(a, b)
 Returns the negation of the result of `xor(a, b)`, where the `a` and `b` passed into `xor` are the same `a` and `b` the user provides for `xnor`.
 
 ```javascript
@@ -980,15 +989,15 @@ console.log(lolite.stubNull()) // null
 # EXTENDED DOCUMENTATION
 LoLite contains some private utilities in its code that it uses internally. These are exported under the `__private` key in the default export. You probably don't want to use these, unless you have a really good reason to.
 
-### `arrayOfAllBooleans.js`
-This is a file that exports an array that contains true and false.
+### __private.arrayOfAllBooleans
+An array that contains true and false.
 ```javascript
-const lolite = require("lolite")
+const booleans = require("lolite").__private.arrayOfAllBooleans
 
-console.log(lolite.__private.arrayOfAllBooleans) // [true, false]
+console.log(booleans) // [true, false]
 ```
 
-### `crash.js`
+### __private.crash
 An internal function that crashes the program. This is used internally in code for cases that should never happen. If LoLite crashes, it is a serious bug and your Node.js could be broken, or the world could be ending.
 ```javascript
 const crash_program = require("lolite").__private.crash
@@ -1007,15 +1016,15 @@ Note: you can also require `lolite/test/crash` and it will immediately crash the
 require("lolite/test/crash") // crashes program
 ```
 
-### `date.js`
-A file that just exports the `Date` constructor.
+### __private.date
+The `Date` constructor.
 ```javascript
 const $Date = require("lolite").__private.date
 const assert = require("node:assert")
 assert.ok($Date === Date)
 ```
 
-### `invertFallback.js`
+### __private.invertFallback
 A fallback implementation of `lolite.invert` to avoid circular dependencies. No non-finite-to-zero coercion is in this implementation.
 ```javascript
 const invert = require("lolite").__private.invertFallback
@@ -1024,7 +1033,7 @@ console.log(invert(-1)) // 1
 console.log(invert("hi")) // "hi" (normal lolite.invert would return -0)
 ```
 
-### `isNotInteger.js`
+### __private.isNotInteger
 An internal function that checks if a value is not an integer. This is used to avoid a crash-on-zero bug in the `is-not-integer` NPM package.
 ```javascript
 const isNotInteger = require("lolite").__private.isNotInteger
@@ -1033,11 +1042,11 @@ console.log(isNotInteger(3.2)) // true
 console.log(isNotInteger("test")) // true
 ```
 
-### `multiplyFallback.js`
+### __private.multiplyFallback
 A fallback implementation of `lolite.multiply` to avoid circular dependencies. No non-finite-to-zero coercion is in this implementation.
 ```javascript
-const lolite = require("lolite")
-console.log(lolite.__private.multiplyFallback(2, 6)) // 12
+const multiply = require("lolite").__private.multiplyFallback
+console.log(multiply(2, 6)) // 12
 ```
 
 

@@ -16,6 +16,7 @@ const lolite = {
   last: require("./lib/last"),
   tail: require("./lib/tail"),
   initial: require("./lib/initial"),
+  sample: require("./lib/sample"),
 
   add: require("./lib/add"),
   subtract: require("./lib/subtract"),

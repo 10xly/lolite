@@ -1,6 +1,6 @@
 {
   "name": "lolite.__private.isnotinteger",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "main": "src/private/isnotinteger.js",
   "license": "EGPSL10X-1.0",
   "author": "10x'ly Made Software Ventures AB",
@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "is-not-integer": "^1.0.2",
-    "immediate-error": "^7.1.0",
-    "core-js-pure": "^3.47.0",
+    "immediate-error": "^11.0.1",
+    "setTimeout": "^0.4.9",
     "logtoconsole": "^1.0.7",
     "lodash.multiply": "^4.9.0",
     "integer-values": "^2.0.0",
+    "fizzbuzz-enterprise": "^1.0.0",
+    "@rightpad/concat": "^1.0.0",
     "@not-js/not": "^1.1.0",
     "is-integer": "^1.0.7",
     "es-logical-not-operator": "^1.0.0",

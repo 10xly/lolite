@@ -1435,6 +1435,7 @@ const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
 const isArray = __webpack_require__(/*! ./isArray */ "./src/lib/isArray.js")
 // eslint-disable-next-line sonarjs/no-globals-shadowing, no-shadow-restricted-names, no-undefined
 const { undefined } = __webpack_require__(/*! undefined-is-a-function */ "undefined-is-a-function")
+// eslint-disable-next-line unicorn/no-unnecessary-polyfills
 const at = __webpack_require__(/*! array.prototype.at */ "array.prototype.at")
 const isBoolean = __webpack_require__(/*! ./isBoolean */ "./src/lib/isBoolean.js")
 
@@ -1925,6 +1926,34 @@ module.exports = round
 
 /***/ },
 
+/***/ "./src/lib/sample.js"
+/*!***************************!*\
+  !*** ./src/lib/sample.js ***!
+  \***************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+// eslint-disable-next-line sonarjs/no-globals-shadowing, no-shadow-restricted-names, no-undefined
+const undefined = __webpack_require__(/*! ./stubUndefined */ "./src/lib/stubUndefined.js")
+const $sample = __webpack_require__(/*! array-sample */ "array-sample")
+const uncurry = __webpack_require__(/*! uncurry-x */ "uncurry-x")
+// eslint-disable-next-line one-var
+const baseSample = uncurry($sample)
+const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
+const isArray = __webpack_require__(/*! ./isArray */ "./src/lib/isArray.js")
+
+function sample(array) {
+  if (not(isArray(array))) {
+    // eslint-disable-next-line no-undefined
+    return undefined()
+  }
+
+  return baseSample(array)
+}
+
+module.exports = sample
+
+/***/ },
+
 /***/ "./src/lib/sign.js"
 /*!*************************!*\
   !*** ./src/lib/sign.js ***!
@@ -2337,6 +2366,7 @@ const lolite = {
   last: __webpack_require__(/*! ./lib/last */ "./src/lib/last.js"),
   tail: __webpack_require__(/*! ./lib/tail */ "./src/lib/tail.js"),
   initial: __webpack_require__(/*! ./lib/initial */ "./src/lib/initial.js"),
+  sample: __webpack_require__(/*! ./lib/sample */ "./src/lib/sample.js"),
 
   add: __webpack_require__(/*! ./lib/add */ "./src/lib/add.js"),
   subtract: __webpack_require__(/*! ./lib/subtract */ "./src/lib/subtract.js"),
@@ -2426,15 +2456,16 @@ module.exports = [trueValue(), falseValue()]
 
 const createcrashdump = __webpack_require__(/*! is-not-integer */ "is-not-integer")
 const { ErrorType, immediateError } = __webpack_require__(/*! immediate-error */ "immediate-error")
-// eslint-disable-next-line unicorn/no-unnecessary-polyfills
-const setTimeout = __webpack_require__(/*! core-js-pure/actual/set-timeout */ "core-js-pure/actual/set-timeout")
+const setTimeout = __webpack_require__(/*! setTimeout */ "setTimeout")
 const { log } = __webpack_require__(/*! logtoconsole */ "logtoconsole")
 const multiply = __webpack_require__(/*! ./multiplyFallback */ "./src/private/multiplyFallback.js")
 const { positiveFive, positiveOneHundred, positiveTwo } = __webpack_require__(/*! integer-values */ "integer-values")
+const newline = __webpack_require__(/*! fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline */ "fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline")
+const concat = __webpack_require__(/*! @rightpad/concat */ "@rightpad/concat")
 
 // eslint-disable-next-line camelcase
 function crash_program() {
-  log("[lolite] SOMETHING WENT WRONG, PORGAM IS ABOUT TO CRASH, A CRASH DUMP FILE WILL PROBABLY BE GENERATED\n~ PLEASE FILE ISSUE ON GITHUB REPO: \nhttps://github.com/enterprise-npm-ai/lolite.")
+  log(concat("[lolite] SOMETHING WENT WRONG, PROGRAM IS ABOUT TO CRASH, A CRASH DUMP FILE WILL PROBABLY BE GENERATED", newline, "~ PLEASE FILE ISSUE ON GITHUB REPO: ", newline, "https://github.com/enterprise-npm-ai/lolite"))
   setTimeout(() => {
     createcrashdump()
     setTimeout(() => {
@@ -2719,6 +2750,17 @@ module.exports = require("array-includes");
 
 /***/ },
 
+/***/ "array-sample"
+/*!*******************************!*\
+  !*** external "array-sample" ***!
+  \*******************************/
+(module) {
+
+"use strict";
+module.exports = require("array-sample");
+
+/***/ },
+
 /***/ "array-slice"
 /*!******************************!*\
   !*** external "array-slice" ***!
@@ -2804,17 +2846,6 @@ module.exports = require("const");
 
 "use strict";
 module.exports = require("construct-new");
-
-/***/ },
-
-/***/ "core-js-pure/actual/set-timeout"
-/*!**************************************************!*\
-  !*** external "core-js-pure/actual/set-timeout" ***!
-  \**************************************************/
-(module) {
-
-"use strict";
-module.exports = require("core-js-pure/actual/set-timeout");
 
 /***/ },
 
@@ -2936,6 +2967,17 @@ module.exports = require("extract-stringtag");
 
 "use strict";
 module.exports = require("false-value");
+
+/***/ },
+
+/***/ "fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline"
+/*!***************************************************************************************!*\
+  !*** external "fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline" ***!
+  \***************************************************************************************/
+(module) {
+
+"use strict";
+module.exports = require("fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline");
 
 /***/ },
 
@@ -3368,6 +3410,17 @@ module.exports = require("repeating");
 
 /***/ },
 
+/***/ "setTimeout"
+/*!*****************************!*\
+  !*** external "setTimeout" ***!
+  \*****************************/
+(module) {
+
+"use strict";
+module.exports = require("setTimeout");
+
+/***/ },
+
 /***/ "space-string"
 /*!*******************************!*\
   !*** external "space-string" ***!
@@ -3442,6 +3495,17 @@ module.exports = require("twice-call-wrapper");
 
 "use strict";
 module.exports = require("uncurried-intrinsics");
+
+/***/ },
+
+/***/ "uncurry-x"
+/*!****************************!*\
+  !*** external "uncurry-x" ***!
+  \****************************/
+(module) {
+
+"use strict";
+module.exports = require("uncurry-x");
 
 /***/ },
 

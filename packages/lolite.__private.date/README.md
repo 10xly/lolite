@@ -1,8 +1,3 @@
-### `date.js`
-A file that just exports the `Date` constructor.
-```javascript
-const $Date = require("lolite.__private.date")
-const assert = require("node:assert")
-assert.ok($Date === Date)
-```
-
+## __private.date
+
+See the [LoLite Readme](https://github.com/enterprise-npm-ai/lolite?tab=readme-ov-file#extended-documentation) for documentation on this utility.
