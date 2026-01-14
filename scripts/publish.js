@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-const fs = require("fs")
+const fs = require("fs").promises
+const { existsSync } = require("fs")
 const path = require("path")
 
 const FORCED_DEPENDENCIES = {
-  "lolite.__private.date": ["date"],
+  "lolite.__private.date": ["date"]
 }
 
 /* -------------------------------------------------- */
-/* Logging helpers                                     */
+/* Logging helpers                                    */
 /* -------------------------------------------------- */
 const log = (msg) => console.log(`🔍 ${msg}`)
 const step = (msg) => console.log(`📦 ${msg}`)
@@ -24,21 +25,18 @@ const PRIVATE = path.join(SRC, "private")
 const DIST = path.join(ROOT, "packages")
 
 const parentPkg = require(path.join(ROOT, "package.json"))
-const parentReadme = fs.readFileSync(path.join(ROOT, "README.md"), "utf8")
-
-if (!fs.existsSync(DIST)) {
-  log("Creating packages directory.  ")
-  fs.mkdirSync(DIST)
-}
+let parentReadme = ""
 
 /* -------------------------------------------------- */
-/* Utilities                                          */
+/* Utilities & Caching                                */
 /* -------------------------------------------------- */
 const toLower = (s) => s.toLowerCase()
+const scanCache = new Map()
 
-function getJsFiles(dir) {
-  if (!fs.existsSync(dir)) return []
-  return fs.readdirSync(dir).filter((f) => f.endsWith(".js"))
+async function getJsFiles(dir) {
+  if (!existsSync(dir)) return []
+  const files = await fs.readdir(dir)
+  return files.filter((f) => f.endsWith(".js"))
 }
 
 function parseRequires(code) {
@@ -59,30 +57,38 @@ function getExternalPackage(dep) {
 }
 
 /* -------------------------------------------------- */
-/* Dependency collection                               */
+/* Dependency collection (Optimized with Cache)       */
 /* -------------------------------------------------- */
-function collectDeps(entryFile, seenFiles = new Set(), externalDeps = new Set()) {
+async function collectDeps(entryFile, seenFiles = new Set(), externalDeps = new Set()) {
   if (seenFiles.has(entryFile)) return { seenFiles, externalDeps }
   seenFiles.add(entryFile)
 
-  log(`Scanning ${path.relative(ROOT, entryFile)}.  `)
+  // Use cache to avoid re-reading and re-parsing the same file across different packages
+  let data
+  if (scanCache.has(entryFile)) {
+    data = scanCache.get(entryFile)
+  } else {
+    const code = await fs.readFile(entryFile, "utf8")
+    const requires = parseRequires(code)
+    data = { code, requires }
+    scanCache.set(entryFile, data)
+  }
 
-  const code = fs.readFileSync(entryFile, "utf8")
-  const requires = parseRequires(code)
-
-  for (const req of requires) {
+  for (const req of data.requires) {
     if (req.startsWith("./") || req.startsWith("../")) {
-      const resolved = fs.existsSync(req) ? req : path.resolve(path.dirname(entryFile), req)
-
-      const file = fs.existsSync(resolved) ? resolved : fs.existsSync(`${resolved}.js`) ? `${resolved}.js` : null
+      const resolvedBase = path.resolve(path.dirname(entryFile), req)
+      const file = existsSync(resolvedBase) 
+        ? resolvedBase 
+        : existsSync(`${resolvedBase}.js`) 
+          ? `${resolvedBase}.js` 
+          : null
 
       if (file) {
-        collectDeps(file, seenFiles, externalDeps)
+        await collectDeps(file, seenFiles, externalDeps)
       }
     } else {
       const pkg = getExternalPackage(req)
       externalDeps.add(pkg)
-      log(`Found external dependency: ${pkg}.  `)
     }
   }
 
@@ -104,65 +110,49 @@ function rewritePrivateExamples(text, name) {
 
 function extractPublicReadme(name) {
   const regex = new RegExp(`##\\s+${name}\\([^)]*\\)[\\s\\S]*?(?=\\n###|$)`, "i")
-
   const match = parentReadme.match(regex)
-  if (!match) {
-    return `## ${name}\n\nNo documentation available.\n`
-  }
-
+  if (!match) return `## ${name}\n\nNo documentation available.\n`
   return rewritePublicExamples(match[0], name)
 }
 
 function extractPrivateReadme(name) {
   const fileName = `${name}.js`
   const regex = new RegExp(`###\\s+\`${fileName}\`[\\s\\S]*?(?=\\n###|$)`, "i")
-
   const match = parentReadme.match(regex)
-  if (!match) {
-    return `## ${name}\n\nNo documentation available.\n`
-  }
-
+  if (!match) return `## ${name}\n\nNo documentation available.\n`
   return rewritePrivateExamples(match[0], name)
 }
 
 /* -------------------------------------------------- */
-/* Package builder                                    */
+/* Package builder (Parallel-ready)                   */
 /* -------------------------------------------------- */
-function buildPackage(name, entryFile, type) {
+async function buildPackage(name, entryFile, type) {
   const cleanName = toLower(name.replace("__private.", ""))
   const pkgName = type === "private" ? `lolite.__private.${cleanName}` : `lolite.${cleanName}`
 
   const pkgDir = path.join(DIST, pkgName)
   const srcDir = path.join(pkgDir, "src")
 
-  step(`Building ${pkgName}.  `)
+  step(`Building ${pkgName}...`)
 
-  fs.mkdirSync(srcDir, { recursive: true })
+  await fs.mkdir(srcDir, { recursive: true })
 
-  const { seenFiles, externalDeps } = collectDeps(entryFile)
+  const { seenFiles, externalDeps } = await collectDeps(entryFile)
 
-  log(`Bundling ${seenFiles.size} internal file(s).  `)
-  for (const file of seenFiles) {
+  // Copy internal files in parallel
+  await Promise.all(Array.from(seenFiles).map(async (file) => {
     const rel = path.relative(SRC, file)
     const dest = path.join(srcDir, rel)
-    fs.mkdirSync(path.dirname(dest), { recursive: true })
-    fs.copyFileSync(file, dest)
-  }
+    await fs.mkdir(path.dirname(dest), { recursive: true })
+    return fs.copyFile(file, dest)
+  }))
 
   const dependencies = {}
-  for (const dep of externalDeps) {
+  const allDeps = new Set([...externalDeps, ...(FORCED_DEPENDENCIES[pkgName] || [])])
+  
+  for (const dep of allDeps) {
     if (parentPkg.dependencies?.[dep]) {
       dependencies[dep] = parentPkg.dependencies[dep]
-    }
-  }
-
-  const forced = FORCED_DEPENDENCIES[pkgName]
-  if (forced) {
-    log(`Applying forced dependencies: ${forced.join(", ")}.  `)
-    for (const dep of forced) {
-      if (parentPkg.dependencies?.[dep]) {
-        dependencies[dep] = parentPkg.dependencies[dep]
-      }
     }
   }
 
@@ -178,28 +168,44 @@ function buildPackage(name, entryFile, type) {
     dependencies,
   }
 
-  fs.writeFileSync(path.join(pkgDir, "package.json"), JSON.stringify(pkgJson, null, 2))
-
   const readme = type === "private" ? extractPrivateReadme(cleanName) : extractPublicReadme(cleanName)
 
-  fs.writeFileSync(path.join(pkgDir, "README.md"), readme)
+  await Promise.all([
+    fs.writeFile(path.join(pkgDir, "package.json"), JSON.stringify(pkgJson, null, 2)),
+    fs.writeFile(path.join(pkgDir, "README.md"), readme)
+  ])
 
-  done(`${pkgName} complete.  `)
+  done(`${pkgName} complete.`)
 }
 
 /* -------------------------------------------------- */
-/* Execution                                           */
+/* Execution                                          */
 /* -------------------------------------------------- */
-log("Processing public utilities.  ")
-for (const file of getJsFiles(LIB)) {
-  const name = path.basename(file, ".js")
-  buildPackage(name, path.join(LIB, file), "lib")
+async function main() {
+  if (!existsSync(DIST)) {
+    await fs.mkdir(DIST)
+  }
+
+  parentReadme = await fs.readFile(path.join(ROOT, "README.md"), "utf8")
+
+  const [libFiles, privateFiles] = await Promise.all([
+    getJsFiles(LIB),
+    getJsFiles(PRIVATE)
+  ])
+
+  const tasks = [
+    ...libFiles.map(file => {
+      const name = path.basename(file, ".js")
+      return buildPackage(name, path.join(LIB, file), "lib")
+    }),
+    ...privateFiles.map(file => {
+      const name = path.basename(file, ".js")
+      return buildPackage(`__private.${name}`, path.join(PRIVATE, file), "private")
+    })
+  ]
+
+  await Promise.all(tasks)
+  done("All LoLite packages generated successfully. 🎉")
 }
 
-log("Processing private utilities.  ")
-for (const file of getJsFiles(PRIVATE)) {
-  const name = path.basename(file, ".js")
-  buildPackage(`__private.${name}`, path.join(PRIVATE, file), "private")
-}
-
-done("All LoLite packages generated successfully.  🎉")
+main().catch(console.error)
