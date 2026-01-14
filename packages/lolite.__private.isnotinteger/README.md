@@ -8,3 +8,5 @@ console.log(isNotInteger(39)) // false
 console.log(isNotInteger(3.2)) // true
 console.log(isNotInteger("test")) // true
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

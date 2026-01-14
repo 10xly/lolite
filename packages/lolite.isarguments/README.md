@@ -3,7 +3,7 @@
 ### isArguments(value)
 Check if a value is an `arguments` object.
 ```javascript
-const lolite = require("lolite")
+const isArguments = require("lolite.isarguments")
 const assert = require("node:assert")
 
 (function () {
@@ -24,3 +24,5 @@ assert.ok(!isArguments(null))                      // null is not arguments
 assert.ok(!isArguments(undefined))                 // undefined is not arguments
 assert.ok(!isArguments(() => {}))                  // functions are not arguments
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

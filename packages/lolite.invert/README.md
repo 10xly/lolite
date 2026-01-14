@@ -6,7 +6,7 @@ Non-numeric values are coerced to zero.
 Infinity is negated to -Infinity, and vice versa.
 
 ```javascript
-const lolite = require("lolite")
+const invert = require("lolite.invert")
 const inverted = invert(10)
 // inverted: -10
 
@@ -19,3 +19,5 @@ const negativeInfinity = invert(Infinity)
 const coercedNegative = invert("garbage")
 // result: -0 (0 inverted)
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

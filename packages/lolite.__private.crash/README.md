@@ -18,3 +18,5 @@ Note: you can also require `lolite/test/crash` and it will immediately crash the
 ```javascript
 require("lolite/test/crash") // crashes program
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

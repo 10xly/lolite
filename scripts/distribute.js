@@ -12,9 +12,17 @@ const BLACKLIST = ["index.js", "lolite.js"]
 const getDocsForMethod = (methodName, pkgName) => {
   const regex = new RegExp(`###\\s+\`?(?:lolite\\.)?${methodName}(?:\\(.*?\\))?(?:\\.js)?\`?[\\s\\S]*?(?=###|##|---|\$)`, "i")
   const match = MAIN_README.match(regex)
-  if (!match) return `### ${methodName}\nUtility part of LoLite.`
+  if (!match) return `### ${methodName}\nThis utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.`
+  
   let docs = match[0].trim()
+  
+  // Replace the monolithic require with the atomic one
+  const monolithRequireRegex = /const\s+lolite\s+=\s+require\("lolite"\)/g
+  docs = docs.replace(monolithRequireRegex, `const ${methodName} = require(\"${pkgName}\")`)
+  
+  // Replace lolite.method calls with just method calls
   docs = docs.replace(new RegExp(`lolite\\.${methodName}(?!")`, "g"), methodName)
+  
   return docs
 }
 
@@ -48,11 +56,16 @@ allSrcFiles.forEach((fullPath) => {
   const pkgJson = {
     name: pkgName,
     version: MAIN_PKG.version,
+    description: `Enterprise-grade ${fileName} utility from the LoLite suite`,
     main: "index.js",
+    author: MAIN_PKG.author,
+    license: MAIN_PKG.license,
+    repository: MAIN_PKG.repository,
+    bugs: MAIN_PKG.bugs,
+    homepage: MAIN_PKG.homepage,
     dependencies: {}
   }
 
-  // RECURSIVE REWRITER FUNCTION
   const processFile = (sourcePath, destFileName) => {
     let fileContent = fs.readFileSync(sourcePath, "utf8")
     const requireRegex = /require\("(\.\.?\/.*)"\)/g
@@ -70,15 +83,14 @@ allSrcFiles.forEach((fullPath) => {
         
         if (!fs.existsSync(destPath)) {
           fs.copyFileSync(absolutePath, destPath)
-          processFile(absolutePath, newLocalName) // Recursively fix the copied file
+          processFile(absolutePath, newLocalName)
         }
-        fileContent = fileContent.replace(originalImport, `require("./${depName}")`)
+        fileContent = fileContent.replace(originalImport, `require(\"./${depName}\")`)
       }
     }
 
-    // Add external dependencies to pkgJson
     Object.keys(MAIN_PKG.dependencies).forEach((dep) => {
-      if (fileContent.includes(`require("${dep}")`)) {
+      if (fileContent.includes(`require(\"${dep}\")`)) {
         pkgJson.dependencies[dep] = MAIN_PKG.dependencies[dep]
       }
     })
@@ -89,8 +101,11 @@ allSrcFiles.forEach((fullPath) => {
   processFile(fullPath, "index.js")
 
   if (Object.keys(pkgJson.dependencies).length === 0) delete pkgJson.dependencies
+  
   fs.writeFileSync(path.join(pkgDir, "package.json"), JSON.stringify(pkgJson, null, 2))
-  fs.writeFileSync(path.join(pkgDir, "README.md"), `# ${pkgName}\n\n${getDocsForMethod(fileName, pkgName)}`)
+  
+  const finalReadme = `# ${pkgName}\n\n${getDocsForMethod(fileName, pkgName)}\n\nThis utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.`
+  fs.writeFileSync(path.join(pkgDir, "README.md"), finalReadme)
 })
 
-console.log("Atomic packages flattened and recursively bundled.")
+console.log("Atomic packages with corrected metadata and READMEs generated.")

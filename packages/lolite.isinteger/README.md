@@ -3,7 +3,7 @@
 ### isInteger(value)
 Check if a value is an integer primitive.
 ```javascript
-const lolite = require("lolite")
+const isInteger = require("lolite.isinteger")
 const assert = require("node:assert")
 
 assert.ok(isInteger(42))
@@ -20,3 +20,5 @@ assert.ok(!isInteger("42"))        // strings are not integers
 assert.ok(!isInteger(null))        // null is not an integer
 assert.ok(!isInteger(undefined))   // undefined is not an integer
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

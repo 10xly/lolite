@@ -9,7 +9,7 @@ Note on Negative Arithmetic: LoLite implements Floored Modulo logic ($a \pmod b$
 If the divisor is zero, it will return `NaN`.
 
 ```javascript
-const lolite = require("lolite")
+const modulo = require("lolite.modulo")
 const remainder = modulo(10, 3)
 // remainder: 1
 
@@ -19,3 +19,5 @@ const negativeModuloResult = modulo(10, 3)
 const coercedModulo = modulo(Infinity, "garbage")
 // result: NaN (0 % 0)
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

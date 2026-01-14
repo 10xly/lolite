@@ -4,7 +4,7 @@
 Returns the negation of the result of `xor(a, b)`, where the `a` and `b` passed into `xor` are the same `a` and `b` the user provides for `xnor`.
 
 ```javascript
-const lolite = require("lolite")
+const xnor = require("lolite.xnor")
 const testTruthyValue = "truthy"
 const testFalsyValue = 0
 
@@ -17,3 +17,5 @@ console.log(xnor(false, false)) // true
 console.log(xnor(testTruthyValue, testTruthyValue)) // true
 console.log(xnor(testFalsyValue, testFalsyValue)) // true
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

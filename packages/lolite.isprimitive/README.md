@@ -4,7 +4,7 @@
 Check if a value is a JavaScript primitive. LoLite validates the seven core primitives: string, number, bigint, boolean, symbol, null, and undefined.
 
 ```javascript
-const lolite = require("lolite")
+const isPrimitive = require("lolite.isprimitive")
 const assert = require("node:assert")
 
 assert.ok(isPrimitive("enterprise"))
@@ -20,3 +20,5 @@ assert.ok(!isPrimitive([]))
 assert.ok(!isPrimitive(() => {}))
 assert.ok(!isPrimitive(new String("I am an object now")))
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

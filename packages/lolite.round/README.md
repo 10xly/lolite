@@ -5,7 +5,7 @@ Round a number either up to the nearest whole integer, unless the number is less
 Non-finite or non-numeric values are coerced to zero.
 
 ```javascript
-const lolite = require("lolite")
+const round = require("lolite.round")
 
 const flooredResult = round(2.1)
 // result: 2
@@ -16,3 +16,5 @@ const ceiledResult = round(2.9)
 const coercedResult = round("garbage")
 // result: 0 (0 ceiled)
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.

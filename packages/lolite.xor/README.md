@@ -4,7 +4,7 @@
 Like `or`, but if `a` and `b` are both truthy, or if `a` and `b` are both falsy, returns `false`.
 
 ```javascript
-const lolite = require("lolite")
+const xor = require("lolite.xor")
 const testTruthyValue = "truthy"
 const testFalsyValue = 0
 
@@ -17,3 +17,5 @@ console.log(xor(false, false)) // false
 console.log(xor(testTruthyValue, testTruthyValue)) // false
 console.log(xor(testFalsyValue, testFalsyValue)) // false
 ```
+
+This utility is part of the [LoLite](https://github.com/enterprise-npm-ai/lolite) utility suite.
