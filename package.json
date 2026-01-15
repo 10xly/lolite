@@ -1,7 +1,7 @@
 {
   "name": "lolite",
   "private": false,
-  "version": "1.1.14",
+  "version": "1.1.15",
   "description": "The 10x Utility Library",
   "keywords": [
     "lolite",
@@ -127,10 +127,11 @@
     "release": "npm run build && node scripts/publish"
   },
   "dependencies": {
+    "@10xly/is-instance-of": "^1.0.0",
     "@10xly/strict-equals": "^1.0.0",
     "@extra-array/length": "^2.10.19",
     "@extremejs/utils": "^1.0.0-beta.22",
-    "@identity-js/identity": "^1.2.1",
+    "@identity-js/identity": "^1.2.5",
     "@is-(unknown)/is-array": "^1.0.0",
     "@is-(unknown)/is-false": "^1.5.0",
     "@is-(unknown)/is-finite": "^1.0.0",
@@ -177,9 +178,8 @@
     "important-extremely-useful-classes": "^3.1.0",
     "indexof": "^0.0.1",
     "infinities": "^1.0.1",
-    "integer-values": "^2.0.0",
+    "integer-values": "^2.0.1",
     "is-": "^1.0.0",
-    "is-instance-of": "^1.0.2",
     "is-integer": "^1.0.7",
     "is-negative": "^2.1.0",
     "is-negative-zero": "^2.0.3",
@@ -222,7 +222,7 @@
     "@eslint/js": "^9.39.2",
     "@is-(unknown)/is-nan": "^1.0.0",
     "depcheck": "^1.4.7",
-    "enterprise-10x-testing-framework-js": "^1.0.0",
+    "enterprise-10x-testing-framework-js": "^1.0.1",
     "eslint": "^9.39.2",
     "eslint-formatter-pretty": "^7.0.0",
     "eslint-plugin-ninja": "^0.0.8",

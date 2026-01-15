@@ -1,6 +1,6 @@
 {
   "name": "lolite.isweakset",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "main": "src/lib/isweakset.js",
   "license": "EGPSL10X-1.0",
   "author": "10x'ly Made Software Ventures AB",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "true-value": "^2.0.5",
-    "is-instance-of": "^1.0.2",
+    "@10xly/is-instance-of": "^1.0.0",
     "@is-(unknown)/is-true": "^1.5.0",
     "@is-(unknown)/is-false": "^1.5.0",
     "array-filter": "^1.0.0",
@@ -21,7 +21,7 @@
     "setTimeout": "^0.4.9",
     "logtoconsole": "^1.0.7",
     "lodash.multiply": "^4.9.0",
-    "integer-values": "^2.0.0",
+    "integer-values": "^2.0.1",
     "fizzbuzz-enterprise": "^1.0.0",
     "@rightpad/concat": "^1.0.0"
   }

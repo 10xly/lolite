@@ -922,7 +922,7 @@ module.exports = isInteger
 (module, __unused_webpack_exports, __webpack_require__) {
 
 const trueValue = __webpack_require__(/*! true-value */ "true-value")
-const instanceOf = __webpack_require__(/*! is-instance-of */ "is-instance-of")
+const instanceOf = __webpack_require__(/*! @10xly/is-instance-of */ "@10xly/is-instance-of")
 const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
 const $Map = __webpack_require__(/*! get-intrinsic */ "get-intrinsic")("%Map%", trueValue()),
   // eslint-disable-next-line camelcase
@@ -1236,7 +1236,7 @@ module.exports = isSafeInteger
 (module, __unused_webpack_exports, __webpack_require__) {
 
 const trueValue = __webpack_require__(/*! true-value */ "true-value")
-const instanceOf = __webpack_require__(/*! is-instance-of */ "is-instance-of")
+const instanceOf = __webpack_require__(/*! @10xly/is-instance-of */ "@10xly/is-instance-of")
 const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
 const $Set = __webpack_require__(/*! get-intrinsic */ "get-intrinsic")("%Set%", trueValue()),
   // eslint-disable-next-line camelcase
@@ -1370,7 +1370,7 @@ module.exports = isUndefined
 (module, __unused_webpack_exports, __webpack_require__) {
 
 const trueValue = __webpack_require__(/*! true-value */ "true-value")
-const instanceOf = __webpack_require__(/*! is-instance-of */ "is-instance-of")
+const instanceOf = __webpack_require__(/*! @10xly/is-instance-of */ "@10xly/is-instance-of")
 const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
 const $WeakMap = __webpack_require__(/*! get-intrinsic */ "get-intrinsic")("%WeakMap%", trueValue()),
   // eslint-disable-next-line camelcase
@@ -1401,7 +1401,7 @@ module.exports = $WeakMap
 (module, __unused_webpack_exports, __webpack_require__) {
 
 const trueValue = __webpack_require__(/*! true-value */ "true-value")
-const instanceOf = __webpack_require__(/*! is-instance-of */ "is-instance-of")
+const instanceOf = __webpack_require__(/*! @10xly/is-instance-of */ "@10xly/is-instance-of")
 const not = __webpack_require__(/*! ./not */ "./src/lib/not.js")
 const $WeakSet = __webpack_require__(/*! get-intrinsic */ "get-intrinsic")("%WeakSet%", trueValue()),
   // eslint-disable-next-line camelcase
@@ -2552,6 +2552,17 @@ module.exports = __webpack_require__(/*! lodash.multiply */ "lodash.multiply")
 
 /***/ },
 
+/***/ "@10xly/is-instance-of"
+/*!****************************************!*\
+  !*** external "@10xly/is-instance-of" ***!
+  \****************************************/
+(module) {
+
+"use strict";
+module.exports = require("@10xly/is-instance-of");
+
+/***/ },
+
 /***/ "@10xly/strict-equals"
 /*!***************************************!*\
   !*** external "@10xly/strict-equals" ***!
@@ -3132,17 +3143,6 @@ module.exports = require("integer-values");
 
 "use strict";
 module.exports = require("is-");
-
-/***/ },
-
-/***/ "is-instance-of"
-/*!*********************************!*\
-  !*** external "is-instance-of" ***!
-  \*********************************/
-(module) {
-
-"use strict";
-module.exports = require("is-instance-of");
 
 /***/ },
 

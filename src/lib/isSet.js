@@ -1,5 +1,5 @@
 const trueValue = require("true-value")
-const instanceOf = require("is-instance-of")
+const instanceOf = require("@10xly/is-instance-of")
 const not = require("./not")
 const $Set = require("get-intrinsic")("%Set%", trueValue()),
   // eslint-disable-next-line camelcase

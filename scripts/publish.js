@@ -38,6 +38,7 @@ packages.forEach((pkg) => {
   const version = pkgJson.version
 
   try {
+    
     let remoteInfo = null
     try {
       remoteInfo = JSON.parse(execSync(`npm view ${name} --json`, { stdio: "pipe" }).toString())

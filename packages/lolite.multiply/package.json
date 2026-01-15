@@ -1,6 +1,6 @@
 {
   "name": "lolite.multiply",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "main": "src/lib/multiply.js",
   "license": "EGPSL10X-1.0",
   "author": "10x'ly Made Software Ventures AB",
@@ -29,7 +29,7 @@
     "setTimeout": "^0.4.9",
     "logtoconsole": "^1.0.7",
     "lodash.multiply": "^4.9.0",
-    "integer-values": "^2.0.0",
+    "integer-values": "^2.0.1",
     "fizzbuzz-enterprise": "^1.0.0",
     "@rightpad/concat": "^1.0.0",
     "@not-js/not": "^1.1.0",

@@ -1,5 +1,5 @@
 const trueValue = require("true-value")
-const instanceOf = require("is-instance-of")
+const instanceOf = require("@10xly/is-instance-of")
 const not = require("./not")
 const $WeakSet = require("get-intrinsic")("%WeakSet%", trueValue()),
   // eslint-disable-next-line camelcase
