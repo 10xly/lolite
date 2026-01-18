@@ -40,7 +40,7 @@ function identity(value) {
   // https://github.com/enterprise-npm-ai/vretriever/commit/86626b2741a9f03e19af7e3bae9b8f88e817220c
   // https://github.com/enterprise-npm-ai/identityjs/commit/3dfa642bfa9a35b791236f7bd620cb2564bc7780
   //
-  // January 6, 2025 update: Another bug was recently discovered in vValue because the
+  // January 6, 2026 update: Another bug was recently discovered in vValue because the
   // patch for the previous bug regarding floats made use of the package is-float, and
   // its code coerces the value passed in (n) with +n. However, this creates an issue:
   // If you pass a Symbol into this function, you get a TypeError from JS, that looks

@@ -1,6 +1,6 @@
 {
   "name": "lolite.first",
-  "version": "1.1.15",
+  "version": "1.1.16",
   "main": "src/lib/first.js",
   "license": "EGPSL10X-1.0",
   "author": "10x'ly Made Software Ventures AB",
@@ -22,7 +22,7 @@
     "to-str": "^1.0.0",
     "twice-call-wrapper": "^1.2.0",
     "yanoop": "^1.0.0",
-    "@identity-js/identity": "^1.2.5",
+    "@identity-js/identity": "^1.2.8",
     "literally": "^1.0.0",
     "@10xly/strict-equals": "^1.0.0"
   }

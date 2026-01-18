@@ -1,7 +1,7 @@
 {
   "name": "lolite",
   "private": false,
-  "version": "1.1.15",
+  "version": "1.1.16",
   "description": "The 10x Utility Library",
   "keywords": [
     "lolite",
@@ -131,7 +131,7 @@
     "@10xly/strict-equals": "^1.0.0",
     "@extra-array/length": "^2.10.19",
     "@extremejs/utils": "^1.0.0-beta.22",
-    "@identity-js/identity": "^1.2.5",
+    "@identity-js/identity": "^1.2.8",
     "@is-(unknown)/is-array": "^1.0.0",
     "@is-(unknown)/is-false": "^1.5.0",
     "@is-(unknown)/is-finite": "^1.0.0",
