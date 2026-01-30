@@ -65,6 +65,7 @@ or, if you're sane:
 ```bash
 # sane people don't use this library
 ```
+or, if you're using browser, look below':
 
 ## Importing
 Import it like this:
@@ -74,6 +75,10 @@ const lolite = require("lolite")
 Or, if you're using ESM, this:
 ```javascript
 import * as lolite from "lolite"
+```
+If you're on browser:
+```js
+<script src="https://unpkg.com/lolite-browser"></script>
 ```
 
 ## Individual packages
