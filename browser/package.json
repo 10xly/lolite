@@ -1,6 +1,6 @@
 {
   "name": "lolite-browser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "LoLite for browsers",
   "keywords": [
     "lolite",
@@ -22,6 +22,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "date": "npm:@socketregistry/date@1.0.8"
+    "date": "npm:@socket-override-override/date@1.0.8"
   }
 }
