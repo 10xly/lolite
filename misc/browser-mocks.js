@@ -49,5 +49,7 @@ globalThis.require.resolve = function x(x) {
   }
   throw new Error("uhh")
 }
+if (typeof window === "undefined") globalThis.window = globalThis
+if (typeof self === "undefined") globalThis.self = globalThis
 
 module.exports = { ...coreMocks }

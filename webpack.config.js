@@ -97,7 +97,7 @@ module.exports = [
     output: {
       ...commonConfig.output,
       path: path.resolve(__dirname, "browser"),
-      filename: "index.js",
+      filename: "lolite.js",
     },
   },
 ]
