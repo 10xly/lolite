@@ -96,7 +96,7 @@ module.exports = [
     ],
     output: {
       ...commonConfig.output,
-      path: path.resolve(__dirname, "browser"),
+      path: path.resolve(__dirname, "builds", "browser"),
       filename: "lolite.js",
     },
   },
