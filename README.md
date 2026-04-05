@@ -75,10 +75,6 @@ Or, if you're using ESM, this:
 ```javascript
 import * as lolite from "lolite"
 ```
-If you're on browser:
-```js
-<script src="https://unpkg.com/lolite-browser"></script>
-```
 
 ## Individual packages
 Only want one method from lolite? Well there are packages with individual lolite methods. For example, instead of installing `lolite` and using `lolite.add`, just install the package `lolite.add`. Or for private methods, like `lolite.__private.isNotInteger`, install the package `lolite.__private.isnotinteger`. All lowercase.
@@ -110,7 +106,6 @@ PLEASE STAR THIS REPO!!!!!!!!!! I SPENT DAYS MAKING THIS, AND HARDLY ANYONE RECO
 ## Builds
 LoLite has several builds:
 - [lolite](https://npmjs.com/package/lolite) - The normal build of Lolite.
-- [lolite-browser](https://npmjs.com/package/lolite-browser) - LoLite for browsers. Also works in Node.js as a 1-dependency version of LoLite.
 - [lolite-unbundled](https://npmjs.com/package/lolite-unbundled) - LoLite, but it uses all the tiny lolite.* packages instead.
 
 
