@@ -1,7 +1,7 @@
 {
-  "name": "lolite.now",
+  "name": "lolite.memoize",
   "version": "1.1.25",
-  "main": "src/lib/now.js",
+  "main": "src/lib/memoize.js",
   "license": "EGPSL10X-1.0",
   "author": "10x'ly Made Software Ventures AB",
   "repository": {
@@ -9,6 +9,7 @@
     "url": "git+https://github.com/10xly/lolite.git"
   },
   "dependencies": {
+    "lodash.stubobject": "^4.13.0",
     "function.prototype.exec": "^1.0.0",
     "construct-new-second": "^1.0.0",
     "name-of-function": "^1.0.0",
@@ -36,6 +37,10 @@
     "es-logical-or-operator": "^1.0.0",
     "hasown": "^2.0.2",
     "has-symbol-support-x": "^1.4.2",
-    "has-tostringtag": "^1.0.2"
+    "has-tostringtag": "^1.0.2",
+    "safe-stable-stringify": "^2.5.0",
+    "call-bind-enterprise": "^1.0.0",
+    "@rightpad/convert2string": "^1.0.1",
+    "successor": "^1.0.1"
   }
 }

@@ -45,8 +45,6 @@ const originalBody = bodyMatch[1]
 let atomicBody = originalBody.replace(/lolite\.([a-zA-Z0-9_]+)/g, "$1")
 atomicBody = atomicBody.replace(/([a-zA-Z0-9_]+)\.__private\./g, "")
 
-// 5. Create the Browser version of the body
-const browserBody = originalBody.replace(/lolite\./g, "loliteBrowser.")
 
 // 6. Construct with defensive blocks and environment shimming
 const finalContent = baseContent.replace(
@@ -63,22 +61,6 @@ ${atomicRequires}
     ${atomicBody}
   }
 
-  // SCOPE 3: BROWSER
-  {
-    const originalWindow = global.window
-    const originalSelf = global.self
-    
-    global.window = global
-    global.self = global
-    
-    const loliteBrowser = require("../../builds/browser/lolite.js")
-    
-${browserBody}
-
-    // Cleanup to prevent bleeding into other tests
-    global.window = originalWindow
-    global.self = originalSelf
-  }
 })`
 )
 

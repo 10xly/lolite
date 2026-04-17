@@ -781,7 +781,7 @@ enterpriseTest("Lolite Enterprise-Grade Tests", (assert) => {
   assert(lolite.isNumber(lolite.now()), "now should return a number primitive")
   assert(lolite.isSafeInteger(lolite.now()), "now should return a safe integer")
   assert(lolite.now() > 1735689600000, "now should be a timestamp after Jan 1st 2025")
-  
+
   const timeA = lolite.now()
   const timeB = lolite.now()
   assert(timeB >= timeA, "time should move forward or stay equal (monotonically non-decreasing)")
@@ -789,6 +789,34 @@ enterpriseTest("Lolite Enterprise-Grade Tests", (assert) => {
   const start = lolite.now()
   const end = lolite.now()
   assert(lolite.isNumber(lolite.subtract(end, start)), "now delta should be a valid lolite.subtract result\n")
+
+   // --- MEMOIZE ---
+  let count = 0
+  const fne = (x) => {
+    count = count + 1
+    return x
+  }
+
+  const mFn = lolite.memoize(fne)
+
+  // Functional Integrity
+  assert(mFn(42) === 42, "memoize should return the result of the initial execution")
+  assert(count === 1, "original function should be executed on first call")
+
+  // Cache Retrieval
+  assert(mFn(42) === 42, "memoize should return the same result on the second call")
+  assert(count === 1, "original function should NOT be executed on the second call (cache hit)")
+
+  // Argument Sensitivity
+  assert(mFn(100) === 100, "memoize should execute again for a new unique argument")
+  assert(count === 2, "call count should increment for a new cache miss")
+
+// Multiple Instances
+  const mFn2 = lolite.memoize(fne) 
+  const res2 = mFn2(42)
+
+  assert(res2 === 42, "new memoized instance should return the correct result")
+  assert(count === 3, "new memoized instances should have isolated local caches\n")
 })
 
 printAuditSummary()

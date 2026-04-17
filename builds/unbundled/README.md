@@ -8,4 +8,4 @@ The modular, tree-shakeable distribution of LoLite.
 const lolite = require("lolite-unbundled")
 ```
 
-Contains 71 individual packages as dependencies.
+Contains 72 individual packages as dependencies.

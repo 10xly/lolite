@@ -1,1 +1,1 @@
-module.exports = Date
+module.exports = require("get-intrinsic")("%Date%")

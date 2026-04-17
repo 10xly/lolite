@@ -6,4 +6,6 @@ const lolite = require("lolite.now")
 
 console.log(now() === Date.now()) // true
 ```
+
+## MISC UTILITIES
 

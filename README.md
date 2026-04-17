@@ -85,9 +85,6 @@ Ever wanted a 10x utility library? this library is part of [the 10x engineering 
 ## Tests
 LoLite proudly has some number of test coverage. clone the repo and run npm test to test.
 
-## Linting
-LoLite proudly is linted with almost every ESLint rule, and the recommended rules for Sonar.js ESLint plugin, and almost all the ESLint Unicorn plugin rules. It also uses the ESLint Ninja plugin, the 10x linter plugin.
-
 ## Building
 LoLite uses Webpack to build all of its source code into one file.
 
@@ -1027,6 +1024,22 @@ Gets the timestamp of the number of milliseconds that have elapsed since the Uni
 const lolite = require("lolite")
 
 console.log(lolite.now() === Date.now()) // true
+```
+
+## MISC UTILITIES
+
+### memoize(fn)
+Memoize a function.
+
+```js
+const lolite = require("lolite")
+
+const add = (a, b) => console.log("calculating") || a + b
+
+const memoizedAdd = lolite.memoize(add)
+
+console.log(memoizedAdd(1, 1)) // outputs "calculating" and then 2
+console.log(memoizedAdd(1, 1)) // 2
 ```
 
 ###

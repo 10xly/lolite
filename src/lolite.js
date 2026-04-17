@@ -81,7 +81,8 @@ const lolite = {
   stubFalse: require("./lib/stubFalse"),
   stubNaN: require("./lib/stubNaN"),
 
-  now: require("./lib/now")
+  now: require("./lib/now"),
+  memoize: require("./lib/memoize")
 }
 
 module.exports = lolite

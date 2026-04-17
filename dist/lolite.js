@@ -1475,6 +1475,74 @@ module.exports = max;
 
 /***/ }),
 
+/***/ "./src/lib/memoize.js":
+/*!****************************!*\
+  !*** ./src/lib/memoize.js ***!
+  \****************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+
+
+var globalCache = __webpack_require__(/*! lodash.stubobject */ "lodash.stubobject")();
+// eslint-disable-next-line one-var
+var localCaches = __webpack_require__(/*! lodash.stubobject */ "lodash.stubobject")();
+var v8 = __webpack_require__(/*! node:v8 */ "node:v8");
+var now = __webpack_require__(/*! ./now */ "./src/lib/now.js");
+var stringify = __webpack_require__(/*! safe-stable-stringify */ "safe-stable-stringify");
+var apply = __webpack_require__(/*! call-bind-enterprise/src/callBoundApply */ "call-bind-enterprise/src/callBoundApply");
+var concat = __webpack_require__(/*! @rightpad/concat */ "@rightpad/concat");
+var convert2string = __webpack_require__(/*! @rightpad/convert2string */ "@rightpad/convert2string");
+var plusone = __webpack_require__(/*! @positive-numbers/zero */ "@positive-numbers/zero");
+var successor = __webpack_require__(/*! successor */ "successor");
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+function memoize(fn) {
+  // eslint-disable-next-line no-use-before-define
+  return supermemoizer(keygen(fn), fn);
+}
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+function keygen(fn) {
+  plusone = successor(plusone);
+  return convert2string(v8.serialize(concat(convert2string(fn), now(), plusone)));
+}
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+function registerGlobally(key, fn) {
+  globalCache[key] = fn;
+}
+function registerLocally(key) {
+  localCaches[key] = __webpack_require__(/*! lodash.stubobject */ "lodash.stubobject")();
+}
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+function register(key, fn) {
+  // eslint-disable-next-line no-unused-expressions, sonarjs/no-extra-arguments, sonarjs/no-use-of-empty-return-value, no-sequences
+  registerGlobally(key, fn), registerLocally(key, fn);
+}
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+function supermemoizer(key, fn) {
+  register(key, fn);
+  // eslint-disable-next-line no-use-before-define
+  return memoizer(key, fn);
+}
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+function memoizer(key, fn) {
+  var cache = localCaches[key];
+  return function memoized() {
+    // eslint-disable-next-line prefer-rest-params
+    var localKey = stringify(arguments);
+    // eslint-disable-next-line no-ternary, prefer-rest-params
+    cache[localKey] = localKey in cache ? cache[localKey] : apply(fn, this, arguments);
+    return cache[localKey];
+  };
+}
+module.exports = memoize;
+
+/***/ }),
+
 /***/ "./src/lib/min.js":
 /*!************************!*\
   !*** ./src/lib/min.js ***!
@@ -2494,7 +2562,8 @@ var lolite = {
   stubTrue: __webpack_require__(/*! ./lib/stubTrue */ "./src/lib/stubTrue.js"),
   stubFalse: __webpack_require__(/*! ./lib/stubFalse */ "./src/lib/stubFalse.js"),
   stubNaN: __webpack_require__(/*! ./lib/stubNaN */ "./src/lib/stubNaN.js"),
-  now: __webpack_require__(/*! ./lib/now */ "./src/lib/now.js")
+  now: __webpack_require__(/*! ./lib/now */ "./src/lib/now.js"),
+  memoize: __webpack_require__(/*! ./lib/memoize */ "./src/lib/memoize.js")
 };
 module.exports = lolite;
 
@@ -2561,8 +2630,7 @@ module.exports = crash_program;
 
 
 
-__webpack_require__(/*! core-js/modules/es.date.to-string.js */ "core-js/modules/es.date.to-string.js");
-module.exports = Date;
+module.exports = __webpack_require__(/*! get-intrinsic */ "get-intrinsic")("%Date%");
 
 /***/ }),
 
@@ -2807,6 +2875,16 @@ module.exports = require("@rightpad/concat");
 
 /***/ }),
 
+/***/ "@rightpad/convert2string":
+/*!*******************************************!*\
+  !*** external "@rightpad/convert2string" ***!
+  \*******************************************/
+/***/ (function(module) {
+
+module.exports = require("@rightpad/convert2string");
+
+/***/ }),
+
 /***/ "@stdlib/assert-is-string":
 /*!*******************************************!*\
   !*** external "@stdlib/assert-is-string" ***!
@@ -2924,6 +3002,16 @@ module.exports = require("attempt-statement");
 /***/ (function(module) {
 
 module.exports = require("bogosort");
+
+/***/ }),
+
+/***/ "call-bind-enterprise/src/callBoundApply":
+/*!**********************************************************!*\
+  !*** external "call-bind-enterprise/src/callBoundApply" ***!
+  \**********************************************************/
+/***/ (function(module) {
+
+module.exports = require("call-bind-enterprise/src/callBoundApply");
 
 /***/ }),
 
@@ -3537,6 +3625,16 @@ module.exports = require("lodash.stubarray");
 
 /***/ }),
 
+/***/ "lodash.stubobject":
+/*!************************************!*\
+  !*** external "lodash.stubobject" ***!
+  \************************************/
+/***/ (function(module) {
+
+module.exports = require("lodash.stubobject");
+
+/***/ }),
+
 /***/ "lodash.toarray":
 /*!*********************************!*\
   !*** external "lodash.toarray" ***!
@@ -3617,6 +3715,16 @@ module.exports = require("nan-is-a-function");
 
 /***/ }),
 
+/***/ "node:v8":
+/*!**************************!*\
+  !*** external "node:v8" ***!
+  \**************************/
+/***/ (function(module) {
+
+module.exports = require("node:v8");
+
+/***/ }),
+
 /***/ "not-not":
 /*!**************************!*\
   !*** external "not-not" ***!
@@ -3667,6 +3775,16 @@ module.exports = require("repeating");
 
 /***/ }),
 
+/***/ "safe-stable-stringify":
+/*!****************************************!*\
+  !*** external "safe-stable-stringify" ***!
+  \****************************************/
+/***/ (function(module) {
+
+module.exports = require("safe-stable-stringify");
+
+/***/ }),
+
 /***/ "setTimeout":
 /*!*****************************!*\
   !*** external "setTimeout" ***!
@@ -3704,6 +3822,16 @@ module.exports = require("string-split");
 /***/ (function(module) {
 
 module.exports = require("subtract");
+
+/***/ }),
+
+/***/ "successor":
+/*!****************************!*\
+  !*** external "successor" ***!
+  \****************************/
+/***/ (function(module) {
+
+module.exports = require("successor");
 
 /***/ }),
 

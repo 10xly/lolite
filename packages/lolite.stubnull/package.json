@@ -1,6 +1,6 @@
 {
   "name": "lolite.stubnull",
-  "version": "1.1.22",
+  "version": "1.1.25",
   "main": "src/lib/stubnull.js",
   "license": "EGPSL10X-1.0",
   "author": "10x'ly Made Software Ventures AB",
@@ -9,6 +9,7 @@
     "url": "git+https://github.com/10xly/lolite.git"
   },
   "dependencies": {
+    "get-intrinsic": "^1.3.1",
     "construct-new": "^2.0.4",
     "nan-is-a-function": "^67.67.67",
     "date": "^2.0.6"
