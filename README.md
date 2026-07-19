@@ -59,7 +59,7 @@ npm install
 or, if you're *really* insane:
 ```bash
 npm pkg set dependencies.lolite="*"
-git clone https://github.com/enterprise-npm-ai/lolite.git node_modules/lolite
+git clone https://github.com/10xly/lolite.git node_modules/lolite
 ```
 or, if you're sane:
 ```bash
@@ -80,7 +80,7 @@ import * as lolite from "lolite"
 Only want one method from lolite? Well there are packages with individual lolite methods. For example, instead of installing `lolite` and using `lolite.add`, just install the package `lolite.add`. Or for private methods, like `lolite.__private.isNotInteger`, install the package `lolite.__private.isnotinteger`. All lowercase.
 
 ## What is this?
-Ever wanted a 10x utility library? this library is part of [the 10x engineering maximalism project](https://github.com/enterprise-npm-ai) / 10x'ly Made. We believe in no direct primitive use, and extreme modularism and the SOMOM,TYPRPL responsibility principle (Single/Minimal Or Maximal, Take Your Pick Responsibility Principal). 
+Ever wanted a 10x utility library? this library is part of [the 10x engineering maximalism project](https://github.com/10xly) / 10x'ly Made. We believe in no direct primitive use, and extreme modularism and the SOMOM,TYPRPL responsibility principle (Single/Minimal Or Maximal, Take Your Pick Responsibility Principal). 
 
 ## Tests
 LoLite proudly has some number of test coverage. clone the repo and run npm test to test.
@@ -89,13 +89,13 @@ LoLite proudly has some number of test coverage. clone the repo and run npm test
 LoLite uses Webpack to build all of its source code into one file.
 
 ## License
-[EGPSL10X-1.0](https://github.com/enterprise-npm-ai/EGPSL10X-1.0)
+[EGPSL10X-1.0](https://github.com/10xly/EGPSL10X-1.0)
 
 ## Code Of Conduct
-See the [CODE_OF_CONDUCT](https://github.com/enterprise-npm-ai/lolite/blob/main/CODE_OF_CONDUCT.md) file.
+See the [CODE_OF_CONDUCT](https://github.com/10xly/lolite/blob/main/CODE_OF_CONDUCT.md) file.
 
 ## Contributing
-See the [CONTRIBUTING](https://github.com/enterprise-npm-ai/lolite/blob/main/CONTRIBUTING.md) file.
+See the [CONTRIBUTING](https://github.com/10xly/lolite/blob/main/CONTRIBUTING.md) file.
 
 ## Notice
 PLEASE STAR THIS REPO!!!!!!!!!! I SPENT DAYS MAKING THIS, AND HARDLY ANYONE RECOGNIZES WHAT I'VE DONE! SHARE THIS WITH YOUR FRIENDS! PLEASE!
@@ -1065,7 +1065,7 @@ crash_program()
 
 [lolite] SOMETHING WENT WRONG, PORGAM IS ABOUT TO CRASH, A CRASH DUMP FILE WILL PROBABLY BE GENERATED
 ~ PLEASE FILE ISSUE ON GITHUB REPO:
-https://github.com/enterprise-npm-ai/lolite.
+https://github.com/10xly/lolite.
 Porgam crahed.
 */
 ```
